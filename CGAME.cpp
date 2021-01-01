@@ -182,17 +182,18 @@ void CGAME::updatePosPeople(int direction)
 {
     switch (direction)
     {
-    case (87):
+    case ('W'):
         human.Up();
         break;
-    case (65):
+    case ('A'):
         human.Left(1);
         break;
-    case (83):
+    case ('S'):
         human.Down();
         break;
-    case (68):
+    case ('D'):
         human.Right(1);
+       
         break;
     default:
         break;
@@ -237,4 +238,8 @@ void CGAME::deleteMovingObj()
 CGAME::~CGAME()
 {
     deleteMovingObj();
+}
+void ImpactEffect(int x, int y) {
+    GotoXY(x + 3, y - 2);
+    cout << "@#$%#@#FuC....";
 }
