@@ -76,3 +76,5 @@ bool CPEOPLE::isFinished()
 {
     return (mY == 4);
 }
+
+//aa
