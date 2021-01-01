@@ -52,7 +52,7 @@ int main()
 
     while (IS_RUNNING)
     {
-        DIRECTION = toupper(getch());
+        DIRECTION = toupper(_getch());
         if(DIRECTION == 27)
             return 0;
         if(!game.getPeople().isDead())
