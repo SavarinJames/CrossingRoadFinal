@@ -13,11 +13,35 @@
 #include <conio.h>
 #include <time.h>
 #include <mmsystem.h>
+
 #pragma comment(lib, "Winmm.lib")
+
+
+#define RST "\x1B[0m"
+#define KRED "\x1B[31m"
+#define KGRN "\x1B[32m"
+#define KYEL "\x1B[33m"
+#define KBLU "\x1B[34m"
+#define KMAG "\x1B[35m"
+#define KCYN "\x1B[36m"
+#define KWHT "\x1B[37m"
+
+#define FRED(x) KRED x RST
+#define FGRN(x) KGRN x RST
+#define FYEL(x) KYEL x RST
+#define FBLU(x) KBLU x RST
+#define FMAG(x) KMAG x RST
+#define FCYN(x) KCYN x RST
+#define FWHT(x) KWHT x RST
+
+#define BOLD(x) "\x1B[1m" x RST
+#define UNDL(x) "\x1B[4m" x RST
+
+
 
 using namespace std;
 
-const int CONSOLE_WIDTH = 150;
+const int CONSOLE_WIDTH = 100;
 const int CONSOLE_HEIGHT = 31;
 const int ground = 4;
 
@@ -27,7 +51,8 @@ void setConsoleSize();
 void drawMap(int width, int height);
 void cls();
 void hidecursor();
-
+void menu();
+void ImpactEffect(int x, int y);
 // class MovingObj
 // {
 // protected:
@@ -108,7 +133,7 @@ private:
     bool mState;
 
 public:
-    const string shape = "Y";
+    const string shape = "???";
     CPEOPLE();
     void revive();
     void Up();
@@ -156,5 +181,6 @@ public:
     void deleteMovingObj();
     int getLevel() { return level; }
 };
+
 
 #endif
