@@ -76,3 +76,10 @@ void hidecursor()
     info.bVisible = FALSE;
     SetConsoleCursorInfo(consoleHandle, &info);
 }
+void menu() {
+    system("cls");
+    GotoXY(50, 10);  cout <<"   1. New Game.";
+    GotoXY(50, 11);  cout <<"   2. Load game.";
+    GotoXY(50, 12);  cout <<"   3. Settings.";
+    GotoXY(50, 13);  cout <<"   4. Quit.";
+}

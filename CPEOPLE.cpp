@@ -26,7 +26,7 @@ void CPEOPLE::Up()
 
 void CPEOPLE::Down()
 {
-    if (mY + 5 <= CONSOLE_HEIGHT - 1)
+    if (mY + 5 >= CONSOLE_HEIGHT - 1)
         return;
     mY += 5;
 }
@@ -40,8 +40,8 @@ void CPEOPLE::Left(int speed)
 
 void CPEOPLE::Right(int speed)
 {
-    if (mX + speed >= CONSOLE_WIDTH - 1)
-        return;
+   /* if (mX + speed >= CONSOLE_WIDTH - 1)
+        return;*/
     mX += speed;
 }
 

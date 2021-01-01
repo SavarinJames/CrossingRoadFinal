@@ -15,6 +15,7 @@
 #include <mmsystem.h>
 #pragma comment(lib, "Winmm.lib")
 
+
 using namespace std;
 
 const int CONSOLE_WIDTH = 150;
@@ -27,7 +28,8 @@ void setConsoleSize();
 void drawMap(int width, int height);
 void cls();
 void hidecursor();
-
+void menu();
+void ImpactEffect(int x, int y);
 // class MovingObj
 // {
 // protected:
@@ -108,7 +110,7 @@ private:
     bool mState;
 
 public:
-    const string shape = "Y";
+    const string shape = "???";
     CPEOPLE();
     void revive();
     void Up();
