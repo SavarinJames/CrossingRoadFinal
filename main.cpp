@@ -166,10 +166,11 @@ void SubThread() {
 
 int main() {
 
-	hidecursor();
+	
 	char t = '1';
 	while (t != '4')
 	{
+		hidecursor();
 		menu();
 		t = _getch();
 		//game = new CGAME();
