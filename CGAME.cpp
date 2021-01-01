@@ -240,6 +240,19 @@ CGAME::~CGAME()
     deleteMovingObj();
 }
 void ImpactEffect(int x, int y) {
+    GotoXY(x + 3, y - 3);
+    cout << FGRN("OOPS!!$%");
     GotoXY(x + 3, y - 2);
-    cout << "@#$%#@#FuC....";
+    cout << FGRN("  @~^");
+    Sleep(500);
+    GotoXY(x + 3, y - 3);
+    cout << FYEL("OOPS!!$%");
+    GotoXY(x + 3, y - 2);
+    cout << FYEL("  @~^");
+    Sleep(300);
+    mciSendString(TEXT("play crash.mp3 "), NULL, 0, NULL);
+    GotoXY(x + 3, y - 3);
+    cout <<FRED( "OOPS!!$%");
+    GotoXY(x + 3, y - 2);
+    cout << FRED("  @~^");
 }

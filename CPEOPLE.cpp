@@ -13,8 +13,12 @@ void CPEOPLE::revive()
 
 void CPEOPLE::draw()
 {
-    GotoXY(mX, mY);
-    cout << shape;
+    GotoXY(mX, mY-2);
+    cout << " 0";
+    GotoXY(mX, mY - 1);
+    cout << "/|" << char(92);
+    GotoXY(mX, mY - 0);
+    cout << "/ " << char(92);
 }
 
 void CPEOPLE::Up()

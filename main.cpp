@@ -150,7 +150,7 @@ void SubThread() {
 			int impCordY = game.getPeople().getY();
 			GotoXY(impCordX, impCordY);
 			ImpactEffect(game.getPeople().getX(), game.getPeople().getY());
-			Sleep(2000);
+			Sleep(1000);
 			//cout << char(178);
 			//game.resetGame();
 			IS_EXIT = false;
@@ -168,6 +168,8 @@ int main() {
 
 	
 	char t = '1';
+	//string m = "open \"*.mp3\" type mpegvideo alias mp3";
+	//mciSendString(_T("play Music.mp3 repeat"), NULL, 0, NULL);
 	while (t != '4')
 	{
 		hidecursor();
