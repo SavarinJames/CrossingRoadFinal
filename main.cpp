@@ -171,6 +171,8 @@ int main() {
 	while (t != '4')
 	{
 		hidecursor();
+		setConsoleSize();
+		FixConsoleWindow();
 		menu();
 		t = _getch();
 		//game = new CGAME();
@@ -188,6 +190,7 @@ int main() {
 			game.startGame();
 			thread t1(SubThread);
 			while (IS_EXIT) {
+				hidecursor();
 				temp=toupper(_getwch());
 				if (!game.getPeople().isDead()) {
 					if (temp == 27) {
