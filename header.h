@@ -53,18 +53,6 @@ void hidecursor();
 void SetColor(int ForgC);
 void menu();
 void ImpactEffect(int x, int y);
-// class MovingObj
-// {
-// protected:
-//     int mX, mY; // top left cordinate;
-//     int height, width;
-
-// public:
-//     MovingObj() : mX(0), mY(0), height(0), width(0) {}
-//     MovingObj(int cordX, int cordY, int hi, int wi) : mX(cordX), mY(cordY), height(hi), width(wi) {}
-//     virtual void draw() = 0;
-//     virtual bool impact(int cordX, int cordY) = 0;
-// };
 
 class CVEHICLE
 {
