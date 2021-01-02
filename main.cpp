@@ -9,33 +9,39 @@ bool IS_EXIT = true;
 char MOVING;
 int stoptime = 10;
 
-
-void SubThread() {
-	while (IS_EXIT) {
+void SubThread()
+{
+	while (IS_EXIT)
+	{
 		++stoptime;
 
-		if (game.getLevel() > MAX_LEVEL) {
+		if (game.getLevel() > MAX_LEVEL)
+		{
 			IS_EXIT = false;
 			winboard();
 			mciSendString(TEXT("play wingame.mp3 "), NULL, 0, NULL);
 			break;
 		}
 		Sleep(100);
-		if (IS_RUNNING == true) {
+		if (IS_RUNNING == true)
+		{
 
 			if (!game.getPeople().isDead())
 			{
 				game.updatePosVehicle();
 				game.updatePosAnimal();
-				if (MOVING != ' ') {
+				if (MOVING != ' ')
+				{
 					game.updatePosPeople(MOVING);
 					MOVING = ' ';
 				}
 				game.drawGame();
 			}
 
-			if (stoptime % 100 == 0) game.flipTruckLight();
-			if (stoptime % 70 == 0) game.flipCarLight();
+			if (stoptime % 100 == 0)
+				game.flipTruckLight();
+			if (stoptime % 70 == 0)
+				game.flipCarLight();
 
 			/*
 			if (game.IsFinish()) {
@@ -69,10 +75,11 @@ void SubThread() {
 				break;
 			}
 
-			if (game.getPeople().isFinished()) {
+			if (game.getPeople().isFinished())
+			{
 				game.resetGame(game.getLevel() + 1);
 				mciSendString(TEXT("play passlevel.mp3 "), NULL, 0, NULL);
-        stoptime = 10;
+				stoptime = 10;
 				drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, game.getLevel());
 			}
 
@@ -81,8 +88,8 @@ void SubThread() {
 	}
 }
 
-
-int main() {
+int main()
+{
 
 	char t = '1';
 	//string m = "open \"*.mp3\" type mpegvideo alias mp3";
@@ -97,9 +104,12 @@ int main() {
 		//game = new CGAME();
 		IS_EXIT = true;
 		IS_RUNNING = true;
-		MOVING = ' '; stoptime = 10;
-		if (t == '1' || t == '2') {
-			if (t == '2') {
+		MOVING = ' ';
+		stoptime = 10;
+		if (t == '1' || t == '2')
+		{
+			if (t == '2')
+			{
 				// loadgame.
 			}
 			int temp = 0;
@@ -108,37 +118,54 @@ int main() {
 
 			game.startGame();
 			thread t1(SubThread);
-			while (IS_EXIT) {
+			while (IS_EXIT)
+			{
 				hidecursor();
 				temp = toupper(_getwch());
-				if (!game.getPeople().isDead()) {
-					if (temp == 27) {
+				if (!game.getPeople().isDead())
+				{
+					if (temp == 27)
+					{
 						//game.exitGame(t1.native_handle());
 						IS_EXIT = false;
 					}
-					else if (temp == 'P') {
-						if (IS_RUNNING) {
+					else if (temp == 'P')
+					{
+						if (IS_RUNNING)
+						{
 							IS_RUNNING = false;
 						}
-						else {
+						else
+						{
 							IS_RUNNING = true;
 						}
 					}
-					else if (temp == 'K') {
-						if (IS_RUNNING) {}
+					else if (temp == 'K')
+					{
+						if (IS_RUNNING)
+						{
+						}
 						//else game.saveGame();
 					}
-					else if (temp == 'L') {
-						if (IS_RUNNING) {}
+					else if (temp == 'L')
+					{
+						if (IS_RUNNING)
+						{
+						}
 						//else game.loadGame();
 					}
-					else {
-						if (IS_RUNNING) MOVING = temp;
+					else
+					{
+						if (IS_RUNNING)
+							MOVING = temp;
 					}
 				}
-				else {
-					if (temp == 'Y') game.startGame();
-					else {
+				else
+				{
+					if (temp == 'Y')
+						game.startGame();
+					else
+					{
 						//game.exitGame(t1.native_handle());
 						return 0;
 					}
@@ -146,12 +173,13 @@ int main() {
 			}
 			t1.join();
 		}
-		else if (t == '3') {
-			GotoXY(50, 16);  cout << "   Input again.";
+		else if (t == '3')
+		{
+			GotoXY(50, 16);
+			cout << "   Input again.";
 			Sleep(2000);
 		}
 	}
+	quitboard();
 	return 0;
 }
-
-

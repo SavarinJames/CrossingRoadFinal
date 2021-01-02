@@ -46,15 +46,17 @@ void CGAME::resetGame(int lev)
 	leftSide = rand() % 2;
 	if (leftSide)
 		lightCordX = 2;
-	else lightCordX = CONSOLE_WIDTH - 2;
-	lightCordY = ground + 5 * lanes[1] - 3;		  // light for trucks
+	else
+		lightCordX = CONSOLE_WIDTH - 2;
+	lightCordY = ground + 5 * lanes[1] - 3; // light for trucks
 	truckLight.setCord(lightCordX, lightCordY);
 	beginX = 0;
 	while (randNum--)
 	{
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
-		if (beginX > CONSOLE_WIDTH - 3) break;
-		CTRUCK* newTruck = new CTRUCK(beginX, ground + 5 * lanes[1], leftSide);
+		if (beginX > CONSOLE_WIDTH - 3)
+			break;
+		CTRUCK *newTruck = new CTRUCK(beginX, ground + 5 * lanes[1], leftSide);
 		trucks.push_back(newTruck);
 	}
 
@@ -63,15 +65,17 @@ void CGAME::resetGame(int lev)
 	leftSide = rand() % 2;
 	if (leftSide)
 		lightCordX = 2;
-	else lightCordX = CONSOLE_WIDTH - 2;
-	lightCordY = ground + 5 * lanes[2] - 3;	     // light for cars
+	else
+		lightCordX = CONSOLE_WIDTH - 2;
+	lightCordY = ground + 5 * lanes[2] - 3; // light for cars
 	carLight.setCord(lightCordX, lightCordY);
 	beginX = 0;
 	while (randNum--)
 	{
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
-		if (beginX > CONSOLE_WIDTH - 3) break;
-		CCAR* newCar = new CCAR(beginX, ground + 5 * lanes[2], leftSide);
+		if (beginX > CONSOLE_WIDTH - 3)
+			break;
+		CCAR *newCar = new CCAR(beginX, ground + 5 * lanes[2], leftSide);
 		cars.push_back(newCar);
 	}
 
@@ -82,8 +86,9 @@ void CGAME::resetGame(int lev)
 	while (randNum--)
 	{
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
-		if (beginX > CONSOLE_WIDTH - 3) break;
-		CDINOSAUR* newDino = new CDINOSAUR(beginX, ground + 5 * lanes[3], leftSide);
+		if (beginX > CONSOLE_WIDTH - 3)
+			break;
+		CDINOSAUR *newDino = new CDINOSAUR(beginX, ground + 5 * lanes[3], leftSide);
 		dinos.push_back(newDino);
 	}
 
@@ -94,8 +99,9 @@ void CGAME::resetGame(int lev)
 	while (randNum--)
 	{
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
-		if (beginX > CONSOLE_WIDTH - 3) break;
-		CBIRD* newBird = new CBIRD(beginX, ground + 5 * lanes[4], leftSide);
+		if (beginX > CONSOLE_WIDTH - 3)
+			break;
+		CBIRD *newBird = new CBIRD(beginX, ground + 5 * lanes[4], leftSide);
 		birds.push_back(newBird);
 	}
 }
@@ -116,33 +122,33 @@ CPEOPLE CGAME::getPeople()
 	return human;
 }
 
-vector<CVEHICLE*> CGAME::getVehicle()
+vector<CVEHICLE *> CGAME::getVehicle()
 {
-	vector<CVEHICLE*> vehicles;
+	vector<CVEHICLE *> vehicles;
 	for (int i = 0; i < trucks.size(); i++)
 	{
-		CVEHICLE* p = trucks[i];
+		CVEHICLE *p = trucks[i];
 		vehicles.push_back(p);
 	}
 	for (int i = 0; i < cars.size(); i++)
 	{
-		CVEHICLE* p = cars[i];
+		CVEHICLE *p = cars[i];
 		vehicles.push_back(p);
 	}
 	return vehicles;
 }
 
-vector<CANIMAL*> CGAME::getAnimal()
+vector<CANIMAL *> CGAME::getAnimal()
 {
-	vector<CANIMAL*> animals;
+	vector<CANIMAL *> animals;
 	for (int i = 0; i < birds.size(); i++)
 	{
-		CANIMAL* p = birds[i];
+		CANIMAL *p = birds[i];
 		animals.push_back(p);
 	}
 	for (int i = 0; i < dinos.size(); i++)
 	{
-		CANIMAL* p = dinos[i];
+		CANIMAL *p = dinos[i];
 		animals.push_back(p);
 	}
 	return animals;
@@ -187,7 +193,6 @@ void CGAME::updatePosPeople(int direction)
 	}
 }
 
-
 void CGAME::drawGame()
 {
 	cls();
@@ -230,7 +235,8 @@ CGAME::~CGAME()
 	deleteMovingObj();
 }
 
-void ImpactEffect(int x, int y) {
+void ImpactEffect(int x, int y)
+{
 	GotoXY(x + 3, y - 3);
 	cout << FGRN("OOPS!!$%");
 	GotoXY(x + 3, y - 2);
@@ -247,29 +253,58 @@ void ImpactEffect(int x, int y) {
 	GotoXY(x + 3, y - 2);
 	cout << FRED("  @~^");
 }
-void loseboard(int level) {
+void loseboard(int level)
+{
 	system("cls");
-	GotoXY(53, 10);  cout << FCYN(" _____________________________");
-	GotoXY(53, 11);  cout << FCYN("|                             |");
-	GotoXY(53, 12);  cout << FCYN("|                             |");
-	GotoXY(53, 13);  cout << FCYN("|                             |");
-	GotoXY(53, 14);  cout << FCYN("|                             |");
-	GotoXY(53, 15);  cout << FCYN("|                             |");
-	GotoXY(53, 16);  cout << FCYN("|                             |");
-	GotoXY(53, 17);  cout << FCYN("|                             |");
-	GotoXY(53, 18);  cout << FCYN("|                             |");
-	GotoXY(53, 19);  cout << FCYN("|_____________________________|");
-	GotoXY(54, 13);  cout << "     YOU LOSE AT LEVEL " << level;
+	GotoXY(53, 10);
+	cout << FCYN(" _____________________________");
+	GotoXY(53, 11);
+	cout << FCYN("|                             |");
+	GotoXY(53, 12);
+	cout << FCYN("|                             |");
+	GotoXY(53, 13);
+	cout << FCYN("|                             |");
+	GotoXY(53, 14);
+	cout << FCYN("|                             |");
+	GotoXY(53, 15);
+	cout << FCYN("|                             |");
+	GotoXY(53, 16);
+	cout << FCYN("|                             |");
+	GotoXY(53, 17);
+	cout << FCYN("|                             |");
+	GotoXY(53, 18);
+	cout << FCYN("|                             |");
+	GotoXY(53, 19);
+	cout << FCYN("|_____________________________|");
+	GotoXY(54, 13);
+	cout << "     YOU LOSE AT LEVEL " << level;
 
-	GotoXY(54, 15);  cout << "       Press any key ";
-	GotoXY(54, 16);  cout << "       to back Menu.";
+	GotoXY(54, 15);
+	cout << "       Press any key ";
+	GotoXY(54, 16);
+	cout << "       to back Menu.";
 }
-void winboard() {
+void winboard()
+{
 	system("cls");
-	GotoXY(45, 13); cout << FGRN("XXXXXX  XXXXXX  X    X  XXXXX  XXXX      XX    XXXXX  XXXX");
-	GotoXY(45, 14); cout << FGRN("X       X    X  X X  X  X      X   X    X  X     X     X  ");
-	GotoXY(45, 15); cout << FGRN("X       X    X  X  X X  X   X  XXXX    XXXXXX    X       X");
-	GotoXY(45, 16); cout << FGRN("XXXXXX  XXXXXX  X   XX  XXXXX  X   X  X      X   X    XXXX");
+	GotoXY(45, 13);
+	cout << FGRN("XXXXXX  XXXXXX  X    X  XXXXX  XXXX      XX    XXXXX  XXXX");
+	GotoXY(45, 14);
+	cout << FGRN("X       X    X  X X  X  X      X   X    X  X     X     X  ");
+	GotoXY(45, 15);
+	cout << FGRN("X       X    X  X  X X  X   X  XXXX    XXXXXX    X       X");
+	GotoXY(45, 16);
+	cout << FGRN("XXXXXX  XXXXXX  X   XX  XXXXX  X   X  X      X   X    XXXX");
+}
+
+void quitboard()
+{
+	system("cls");
+	GotoXY(45, 13);
+	GotoXY(45, 14);
+	cout << FGRN("THANK YOU! WE HOPE YOU ENJOYED THE GAME!");
+	sleep(1000);
+	system("cls");
 }
 /*
 #include "car_move.h"

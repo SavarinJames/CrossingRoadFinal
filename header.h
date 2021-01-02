@@ -17,7 +17,6 @@
 #include <sstream>
 #pragma comment(lib, "Winmm.lib")
 
-
 #define RST "\x1B[0m"
 #define KRED "\x1B[31m"
 #define KGRN "\x1B[32m"
@@ -27,7 +26,7 @@
 #define KCYN "\x1B[36m"
 #define KWHT "\x1B[37m"
 
-#define FRED(x) KRED x RST        
+#define FRED(x) KRED x RST
 #define FGRN(x) KGRN x RST
 #define FYEL(x) KYEL x RST
 #define FBLU(x) KBLU x RST
@@ -37,7 +36,6 @@
 
 #define BOLD(x) "\x1B[1m" x RST
 #define UNDL(x) "\x1B[4m" x RST
-
 
 using namespace std;
 
@@ -57,6 +55,7 @@ void menu();
 void ImpactEffect(int x, int y);
 void loseboard(int level);
 void winboard();
+void quitboard();
 // class MovingObj
 // {
 // protected:
@@ -146,8 +145,8 @@ public:
 	void Left(int speed);
 	void Right(int speed);
 	void Down();
-	bool isImpact(const vector<CVEHICLE*>& vehicles);
-	bool isImpact(const vector<CANIMAL*>& animals);
+	bool isImpact(const vector<CVEHICLE *> &vehicles);
+	bool isImpact(const vector<CANIMAL *> &animals);
 	bool isFinished();
 	bool isDead();
 	void draw();
@@ -160,6 +159,7 @@ class CLIGHT
 private:
 	int mX, mY;
 	bool red;
+
 public:
 	CLIGHT();
 	void setCord(int cordX, int cordY);
@@ -172,11 +172,11 @@ class CGAME
 {
 private:
 	int level;
-	int lanes[5] = { 0, 1, 2, 3, 4 };
-	vector<CTRUCK*> trucks;
-	vector<CCAR*> cars;
-	vector<CDINOSAUR*> dinos;
-	vector<CBIRD*> birds;
+	int lanes[5] = {0, 1, 2, 3, 4};
+	vector<CTRUCK *> trucks;
+	vector<CCAR *> cars;
+	vector<CDINOSAUR *> dinos;
+	vector<CBIRD *> birds;
 	CPEOPLE human;
 	CLIGHT truckLight, carLight;
 
@@ -188,8 +188,8 @@ public:
 	void flipCarLight();
 	void drawGame();
 	CPEOPLE getPeople();
-	vector<CVEHICLE*> getVehicle();
-	vector<CANIMAL*> getAnimal();
+	vector<CVEHICLE *> getVehicle();
+	vector<CANIMAL *> getAnimal();
 	void resetGame(int lev);
 	void exitGame(HANDLE);
 	void startGame();
@@ -203,6 +203,5 @@ public:
 	void deleteMovingObj();
 	int getLevel() { return level; }
 };
-
 
 #endif
