@@ -160,6 +160,9 @@ void SubThread() {
 			break;
 		}
 
+		if (game.getPeople().isFinished())
+			game.resetGame(game.getLevel() + 1);
+
 		//Sleep(100 / cg->getSpeed());
 	}
 
