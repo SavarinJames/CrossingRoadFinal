@@ -26,7 +26,7 @@
 #define KCYN "\x1B[36m"
 #define KWHT "\x1B[37m"
 
-#define FRED(x) KRED x RST
+#define FRED(x) KRED x RST        
 #define FGRN(x) KGRN x RST
 #define FYEL(x) KYEL x RST
 #define FBLU(x) KBLU x RST
@@ -50,6 +50,7 @@ void setConsoleSize();
 void drawMap(int width, int height);
 void cls();
 void hidecursor();
+void SetColor(int ForgC);
 void menu();
 void ImpactEffect(int x, int y);
 // class MovingObj
@@ -68,117 +69,133 @@ void ImpactEffect(int x, int y);
 class CVEHICLE
 {
 protected:
-    int mX, mY;
-    bool toLeft;
+	int mX, mY;
+	bool toLeft;
 
 public:
-    CVEHICLE(int x, int y, bool goingLeft);
-    void move();
-    virtual void draw() = 0;
-    int getX() { return mX; }
-    int getY() { return mY; }
+	CVEHICLE(int x, int y, bool goingLeft);
+	void move();
+	virtual void draw() = 0;
+	int getX() { return mX; }
+	int getY() { return mY; }
 };
 
 class CCAR : public CVEHICLE
 {
 public:
-    const string shape = "C";
-    CCAR(int x, int y, bool goingLeft);
-    void draw();
+	const string shape = "C";
+	CCAR(int x, int y, bool goingLeft);
+	void draw();
 };
 
 class CTRUCK : public CVEHICLE
 {
 public:
-    const string shape = "T";
-    CTRUCK(int x, int y, bool goingLeft);
-    void draw();
+	const string shape = "T";
+	CTRUCK(int x, int y, bool goingLeft);
+	void draw();
 };
 
 class CANIMAL
 {
 protected:
-    int mX, mY;
-    bool toLeft;
+	int mX, mY;
+	bool toLeft;
 
 public:
-    CANIMAL(int x, int y, bool goingLeft);
-    void move();
-    virtual void draw() = 0;
-    int getX() { return mX; }
-    int getY() { return mY; }
+	CANIMAL(int x, int y, bool goingLeft);
+	void move();
+	virtual void draw() = 0;
+	int getX() { return mX; }
+	int getY() { return mY; }
 };
 
 class CBIRD : public CANIMAL
 {
 public:
-    const string shape = "B";
-    CBIRD(int x, int y, int goingLeft);
-    void draw();
+	const string shape = "B";
+	CBIRD(int x, int y, int goingLeft);
+	void draw();
 };
 
 class CDINOSAUR : public CANIMAL
 {
 public:
-    const string shape = "D";
-    CDINOSAUR(int x, int y, int goingLeft);
-    void draw();
+	const string shape = "D";
+	CDINOSAUR(int x, int y, int goingLeft);
+	void draw();
 };
 
 class CPEOPLE
 {
 private:
-    int mX, mY;
-    bool mState;
+	int mX, mY;
+	bool mState;
 
 public:
-    const string shape = "???";
-    CPEOPLE();
-    void revive();
-    void Up();
-    void Left(int speed);
-    void Right(int speed);
-    void Down();
-    bool isImpact(const vector<CVEHICLE *> &vehicles);
-    bool isImpact(const vector<CANIMAL *> &animals);
-    bool isFinished();
-    bool isDead();
-    void draw();
-    int getX() { return mX; }
-    int getY() { return mY; }
+	const string shape = "???";
+	CPEOPLE();
+	void revive();
+	void Up();
+	void Left(int speed);
+	void Right(int speed);
+	void Down();
+	bool isImpact(const vector<CVEHICLE*>& vehicles);
+	bool isImpact(const vector<CANIMAL*>& animals);
+	bool isFinished();
+	bool isDead();
+	void draw();
+	int getX() { return mX; }
+	int getY() { return mY; }
+};
+
+class CLIGHT
+{
+private:
+	int mX, mY;
+	bool red;
+public:
+	CLIGHT();
+	void setCord(int cordX, int cordY);
+	void lightSwitch();
+	void draw();
+	bool canGo() { return !red; }
 };
 
 class CGAME
 {
 private:
-    int level;
-    int lanes[5] = {0, 1, 2, 3, 4};
-    vector<CTRUCK *> trucks;
-    vector<CCAR *> cars;
-    vector<CDINOSAUR *> dinos;
-    vector<CBIRD *> birds;
-    CPEOPLE human;
+	int level;
+	int lanes[5] = { 0, 1, 2, 3, 4 };
+	vector<CTRUCK*> trucks;
+	vector<CCAR*> cars;
+	vector<CDINOSAUR*> dinos;
+	vector<CBIRD*> birds;
+	CPEOPLE human;
+	CLIGHT truckLight, carLight;
 
 public:
-    void shuffleLanes();
-    CGAME();
-    ~CGAME();
-    void drawGame();
-    CPEOPLE getPeople();
-    vector<CVEHICLE *> getVehicle();
-    vector<CANIMAL *> getAnimal();
-    void resetGame(int lev);
-    void exitGame(HANDLE);
-    void startGame();
-    void loadGame(ifstream);
-    void saveGame(ofstream);
-    void pauseGame(HANDLE);
-    void resumeGame(HANDLE);
-    void updatePosPeople(int direction);
-    void updatePosVehicle();
-    void updatePosAnimal();
-    void deleteMovingObj();
-    int getLevel() { return level; }
+	void shuffleLanes();
+	CGAME();
+	~CGAME();
+	void flipTruckLight();
+	void flipCarLight();
+	void drawGame();
+	CPEOPLE getPeople();
+	vector<CVEHICLE*> getVehicle();
+	vector<CANIMAL*> getAnimal();
+	void resetGame(int lev);
+	void exitGame(HANDLE);
+	void startGame();
+	void loadGame(ifstream);
+	void saveGame(ofstream);
+	void pauseGame(HANDLE);
+	void resumeGame(HANDLE);
+	void updatePosPeople(int direction);
+	void updatePosVehicle();
+	void updatePosAnimal();
+	void deleteMovingObj();
+	int getLevel() { return level; }
 };
 
 
