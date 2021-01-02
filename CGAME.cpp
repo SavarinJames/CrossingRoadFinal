@@ -4,63 +4,7 @@ using namespace std;
 
 CGAME::CGAME()
 {
-	shuffleLanes();
-	level = 1;
-	int maxObj = 3;
-	int randNum;
-	int beginX;
-	int lightCordX, lightCordY;
-	bool leftSide;
-
-	// for Trucks
-	randNum = rand() % maxObj + 3;
-	leftSide = rand() % 2;
-	if (leftSide)
-		lightCordX = 2;
-	else lightCordX = CONSOLE_WIDTH - 2;
-	lightCordY = ground + 5 * lanes[1] - 3;
-	truckLight.setCord(lightCordX, lightCordY);
-	while (randNum--)
-	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
-		CTRUCK* newTruck = new CTRUCK(beginX, ground + 5 * lanes[1], leftSide);
-		trucks.push_back(newTruck);
-	}
-
-	// for Cars
-	randNum = rand() % maxObj + 3;
-	leftSide = rand() % 2;
-	if (leftSide)
-		lightCordX = 2;
-	else lightCordX = CONSOLE_WIDTH - 2;
-	lightCordY = ground + 5 * lanes[2] - 3;
-	carLight.setCord(lightCordX, lightCordY);
-	while (randNum--)
-	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
-		CCAR* newCar = new CCAR(beginX, ground + 5 * lanes[2], leftSide);
-		cars.push_back(newCar);
-	}
-
-	// for Dinos
-	randNum = rand() % maxObj + 3;
-	leftSide = rand() % 2;
-	while (randNum--)
-	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
-		CDINOSAUR* newDino = new CDINOSAUR(beginX, ground + 5 * lanes[3], leftSide);
-		dinos.push_back(newDino);
-	}
-
-	// for Birds
-	randNum = rand() % maxObj + 3;
-	leftSide = rand() % 2;
-	while (randNum--)
-	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
-		CBIRD* newBird = new CBIRD(beginX, ground + 5 * lanes[4], leftSide);
-		birds.push_back(newBird);
-	}
+	resetGame(1);
 }
 
 void CGAME::flipTruckLight()
@@ -91,7 +35,7 @@ void CGAME::resetGame(int lev)
 
 	shuffleLanes();
 	level = lev;
-	int maxObj = lev * 3;
+	int maxObj = lev * 1;
 	int randNum;
 	int beginX;
 	int lightCordX, lightCordY;
