@@ -335,3 +335,22 @@ void loadmenu()
 	system("cls");
 	Sleep(1000);
 }
+
+void displayLevel(int level)
+{
+	system("cls");
+	GotoXY(60, 15);
+	cout << FBLU("L");
+	Sleep(50);
+	cout << FBLU("E");
+	Sleep(50);
+	cout << FBLU("V");
+	Sleep(50);
+	cout << FBLU("E");
+	Sleep(50);
+	cout << FBLU("L ");
+	Sleep(50);
+	cout << level;
+	Sleep(500);
+	system("cls");
+}

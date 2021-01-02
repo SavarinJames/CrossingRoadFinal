@@ -55,6 +55,7 @@ void drawMap(int width, int height, int level);
 
 void menu();
 void ImpactEffect(int x, int y);
+void displayLevel(int level);
 
 void loadmenu();
 void loseboard(int level);

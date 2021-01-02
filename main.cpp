@@ -78,6 +78,7 @@ void SubThread()
 				game.resetGame(game.getLevel() + 1);
 				mciSendString(TEXT("play passlevel.mp3 "), NULL, 0, NULL);
 				stoptime = 10;
+				displayLevel(game.getLevel());
 				drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, game.getLevel());
 			}
 
@@ -114,6 +115,7 @@ int main()
 			setConsoleSize();
 			FixConsoleWindow();
 
+			displayLevel(1);
 			game.startGame();
 			thread t1(SubThread);
 			while (IS_EXIT)
