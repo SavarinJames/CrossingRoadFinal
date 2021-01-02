@@ -112,66 +112,67 @@ int main()
 void SubThread() {
 	while (IS_EXIT) {
 		++stoptime;
-		if (game.getLevel() >  5) {
+		if (game.getLevel() > 5) {
 			IS_EXIT = false;
 			winboard();
 			break;
 		}
 		Sleep(100);
-		//if (IS_RUNNING==false) ;
-		if (!game.getPeople().isDead())
-		{
-			game.updatePosVehicle();
-			game.updatePosAnimal();
-			if (MOVING != ' ') {
-				game.updatePosPeople(MOVING);
-				MOVING = ' ';
+		if (IS_RUNNING == true) {
+			;
+			if (!game.getPeople().isDead())
+			{
+				game.updatePosVehicle();
+				game.updatePosAnimal();
+				if (MOVING != ' ') {
+					game.updatePosPeople(MOVING);
+					MOVING = ' ';
+				}
+				game.drawGame();
 			}
-			game.drawGame();
-		}
 
-		if (stoptime % 100 == 0) game.flipTruckLight();
-		if (stoptime % 70 == 0) game.flipCarLight();
+			if (stoptime % 100 == 0) game.flipTruckLight();
+			if (stoptime % 70 == 0) game.flipCarLight();
 
-		/*
-		if (game.IsFinish()) {
-			game.ScoreBoard(true);
-			IS_EXIT = false;
-			break;
-		}
-		*/
+			/*
+			if (game.IsFinish()) {
+				game.ScoreBoard(true);
+				IS_EXIT = false;
+				break;
+			}
+			*/
 
-		/*
-		MOVING = ' ';
-		if (stoptime % 20 > 10) {
-			cg->DrawLight(true);
-			cg->Update();
-		}
-		else {
-			cg->DrawLight(false);
-		}*/
-		if (game.getPeople().isImpact(game.getVehicle()) || game.getPeople().isImpact(game.getAnimal()))
-		{
-			int impCordX = game.getPeople().getX();
-			int impCordY = game.getPeople().getY();
-			GotoXY(impCordX, impCordY);
-			ImpactEffect(game.getPeople().getX(), game.getPeople().getY());
-			Sleep(1000);
-			loseboard(game.getLevel());
-			//cout << char(178);
-			//game.resetGame();
-			IS_EXIT = false;
+			/*
+			MOVING = ' ';
+			if (stoptime % 20 > 10) {
+				cg->DrawLight(true);
+				cg->Update();
+			}
+			else {
+				cg->DrawLight(false);
+			}*/
+			if (game.getPeople().isImpact(game.getVehicle()) || game.getPeople().isImpact(game.getAnimal()))
+			{
+				int impCordX = game.getPeople().getX();
+				int impCordY = game.getPeople().getY();
+				GotoXY(impCordX, impCordY);
+				ImpactEffect(game.getPeople().getX(), game.getPeople().getY());
+				Sleep(1000);
+				loseboard(game.getLevel());
+				//cout << char(178);
+				//game.resetGame();
+				IS_EXIT = false;
 
-			break;
-		}
+				break;
+			}
 
-		if (game.getPeople().isFinished())
-			game.resetGame(game.getLevel() + 1);
+			if (game.getPeople().isFinished())
+				game.resetGame(game.getLevel() + 1);
 			drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, game.getLevel());
 
-		//Sleep(100 / cg->getSpeed());
+			//Sleep(100 / cg->getSpeed());
+		}
 	}
-
 }
 
 
@@ -212,11 +213,9 @@ int main() {
 					else if (temp == 'P') {
 						if (IS_RUNNING) {
 							IS_RUNNING = false;
-							//game.pauseGame(t1.native_handle());
 						}
 						else {
 							IS_RUNNING = true;
-							//game.resumeGame(t1.native_handle());
 						}
 					}
 					else if (temp == 'K') {
