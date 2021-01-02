@@ -13,13 +13,16 @@ int stoptime = 10;
 void SubThread() {
 	while (IS_EXIT) {
 		++stoptime;
+
 		if (game.getLevel() > MAX_LEVEL) {
 			IS_EXIT = false;
 			winboard();
+			mciSendString(TEXT("play wingame.mp3 "), NULL, 0, NULL);
 			break;
 		}
 		Sleep(100);
 		if (IS_RUNNING == true) {
+
 			if (!game.getPeople().isDead())
 			{
 				game.updatePosVehicle();
@@ -65,10 +68,11 @@ void SubThread() {
 
 				break;
 			}
-			if (game.getPeople().isFinished())
-			{
+
+			if (game.getPeople().isFinished()) {
 				game.resetGame(game.getLevel() + 1);
-				stoptime = 10;
+				mciSendString(TEXT("play passlevel.mp3 "), NULL, 0, NULL);
+        stoptime = 10;
 				drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, game.getLevel());
 			}
 
