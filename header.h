@@ -14,6 +14,7 @@
 #include <time.h>
 #include <mmsystem.h>
 #include <map>
+#include <sstream>
 #pragma comment(lib, "Winmm.lib")
 
 
@@ -47,12 +48,14 @@ const int ground = 4;
 void FixConsoleWindow();
 void GotoXY(int x, int y);
 void setConsoleSize();
-void drawMap(int width, int height);
+void drawMap(int width, int height,int level);
 void cls();
 void hidecursor();
 void SetColor(int ForgC);
 void menu();
 void ImpactEffect(int x, int y);
+void loseboard(int level);
+void winboard();
 // class MovingObj
 // {
 // protected:

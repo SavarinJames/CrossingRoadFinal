@@ -112,7 +112,11 @@ int main()
 void SubThread() {
 	while (IS_EXIT) {
 		++stoptime;
-
+		if (game.getLevel() >  5) {
+			IS_EXIT = false;
+			winboard();
+			break;
+		}
 		Sleep(100);
 		//if (IS_RUNNING==false) ;
 		if (!game.getPeople().isDead())
@@ -153,6 +157,7 @@ void SubThread() {
 			GotoXY(impCordX, impCordY);
 			ImpactEffect(game.getPeople().getX(), game.getPeople().getY());
 			Sleep(1000);
+			loseboard(game.getLevel());
 			//cout << char(178);
 			//game.resetGame();
 			IS_EXIT = false;
@@ -162,6 +167,7 @@ void SubThread() {
 
 		if (game.getPeople().isFinished())
 			game.resetGame(game.getLevel() + 1);
+			drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, game.getLevel());
 
 		//Sleep(100 / cg->getSpeed());
 	}
