@@ -1,7 +1,5 @@
 #include "header.h"
 
-using namespace std;
-
 CGAME::CGAME()
 {
 	resetGame(1);
@@ -46,15 +44,17 @@ void CGAME::resetGame(int lev)
 	leftSide = rand() % 2;
 	if (leftSide)
 		lightCordX = 2;
-	else lightCordX = CONSOLE_WIDTH - 2;
-	lightCordY = ground + 5 * lanes[1] - 3;		  // light for trucks
+	else
+		lightCordX = CONSOLE_WIDTH - 2;
+	lightCordY = ground + 5 * lanes[1] - 3; // light for trucks
 	truckLight.setCord(lightCordX, lightCordY);
 	beginX = 0;
 	while (randNum--)
 	{
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
-		if (beginX > CONSOLE_WIDTH - 3) break;
-		CTRUCK* newTruck = new CTRUCK(beginX, ground + 5 * lanes[1], leftSide);
+		if (beginX > CONSOLE_WIDTH - 3)
+			break;
+		CTRUCK *newTruck = new CTRUCK(beginX, ground + 5 * lanes[1], leftSide);
 		trucks.push_back(newTruck);
 	}
 
@@ -63,15 +63,17 @@ void CGAME::resetGame(int lev)
 	leftSide = rand() % 2;
 	if (leftSide)
 		lightCordX = 2;
-	else lightCordX = CONSOLE_WIDTH - 2;
-	lightCordY = ground + 5 * lanes[2] - 3;	     // light for cars
+	else
+		lightCordX = CONSOLE_WIDTH - 2;
+	lightCordY = ground + 5 * lanes[2] - 3; // light for cars
 	carLight.setCord(lightCordX, lightCordY);
 	beginX = 0;
 	while (randNum--)
 	{
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
-		if (beginX > CONSOLE_WIDTH - 3) break;
-		CCAR* newCar = new CCAR(beginX, ground + 5 * lanes[2], leftSide);
+		if (beginX > CONSOLE_WIDTH - 3)
+			break;
+		CCAR *newCar = new CCAR(beginX, ground + 5 * lanes[2], leftSide);
 		cars.push_back(newCar);
 	}
 
@@ -82,8 +84,9 @@ void CGAME::resetGame(int lev)
 	while (randNum--)
 	{
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
-		if (beginX > CONSOLE_WIDTH - 3) break;
-		CDINOSAUR* newDino = new CDINOSAUR(beginX, ground + 5 * lanes[3], leftSide);
+		if (beginX > CONSOLE_WIDTH - 3)
+			break;
+		CDINOSAUR *newDino = new CDINOSAUR(beginX, ground + 5 * lanes[3], leftSide);
 		dinos.push_back(newDino);
 	}
 
@@ -94,8 +97,9 @@ void CGAME::resetGame(int lev)
 	while (randNum--)
 	{
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
-		if (beginX > CONSOLE_WIDTH - 3) break;
-		CBIRD* newBird = new CBIRD(beginX, ground + 5 * lanes[4], leftSide);
+		if (beginX > CONSOLE_WIDTH - 3)
+			break;
+		CBIRD *newBird = new CBIRD(beginX, ground + 5 * lanes[4], leftSide);
 		birds.push_back(newBird);
 	}
 }
@@ -116,33 +120,33 @@ CPEOPLE CGAME::getPeople()
 	return human;
 }
 
-vector<CVEHICLE*> CGAME::getVehicle()
+vector<CVEHICLE *> CGAME::getVehicle()
 {
-	vector<CVEHICLE*> vehicles;
+	vector<CVEHICLE *> vehicles;
 	for (int i = 0; i < trucks.size(); i++)
 	{
-		CVEHICLE* p = trucks[i];
+		CVEHICLE *p = trucks[i];
 		vehicles.push_back(p);
 	}
 	for (int i = 0; i < cars.size(); i++)
 	{
-		CVEHICLE* p = cars[i];
+		CVEHICLE *p = cars[i];
 		vehicles.push_back(p);
 	}
 	return vehicles;
 }
 
-vector<CANIMAL*> CGAME::getAnimal()
+vector<CANIMAL *> CGAME::getAnimal()
 {
-	vector<CANIMAL*> animals;
+	vector<CANIMAL *> animals;
 	for (int i = 0; i < birds.size(); i++)
 	{
-		CANIMAL* p = birds[i];
+		CANIMAL *p = birds[i];
 		animals.push_back(p);
 	}
 	for (int i = 0; i < dinos.size(); i++)
 	{
-		CANIMAL* p = dinos[i];
+		CANIMAL *p = dinos[i];
 		animals.push_back(p);
 	}
 	return animals;
@@ -187,7 +191,6 @@ void CGAME::updatePosPeople(int direction)
 	}
 }
 
-
 void CGAME::drawGame()
 {
 	cls();
@@ -230,7 +233,8 @@ CGAME::~CGAME()
 	deleteMovingObj();
 }
 
-void ImpactEffect(int x, int y) {
+void ImpactEffect(int x, int y)
+{
 	GotoXY(x + 3, y - 3);
 	cout << FGRN("OOPS!!$%");
 	GotoXY(x + 3, y - 2);
@@ -247,101 +251,106 @@ void ImpactEffect(int x, int y) {
 	GotoXY(x + 3, y - 2);
 	cout << FRED("  @~^");
 }
-void loseboard(int level) {
+void loseboard(int level)
+{
 	system("cls");
-	GotoXY(53, 10);  cout << FCYN(" _____________________________");
-	GotoXY(53, 11);  cout << FCYN("|                             |");
-	GotoXY(53, 12);  cout << FCYN("|                             |");
-	GotoXY(53, 13);  cout << FCYN("|                             |");
-	GotoXY(53, 14);  cout << FCYN("|                             |");
-	GotoXY(53, 15);  cout << FCYN("|                             |");
-	GotoXY(53, 16);  cout << FCYN("|                             |");
-	GotoXY(53, 17);  cout << FCYN("|                             |");
-	GotoXY(53, 18);  cout << FCYN("|                             |");
-	GotoXY(53, 19);  cout << FCYN("|_____________________________|");
-	GotoXY(54, 13);  cout << "     YOU LOSE AT LEVEL " << level;
+	GotoXY(53, 10);
+	cout << FCYN(" _____________________________");
+	GotoXY(53, 11);
+	cout << FCYN("|                             |");
+	GotoXY(53, 12);
+	cout << FCYN("|                             |");
+	GotoXY(53, 13);
+	cout << FCYN("|                             |");
+	GotoXY(53, 14);
+	cout << FCYN("|                             |");
+	GotoXY(53, 15);
+	cout << FCYN("|                             |");
+	GotoXY(53, 16);
+	cout << FCYN("|                             |");
+	GotoXY(53, 17);
+	cout << FCYN("|                             |");
+	GotoXY(53, 18);
+	cout << FCYN("|                             |");
+	GotoXY(53, 19);
+	cout << FCYN("|_____________________________|");
+	GotoXY(54, 13);
+	cout << "     YOU LOSE AT LEVEL " << level;
 
-	GotoXY(54, 15);  cout << "       Press any key ";
-	GotoXY(54, 16);  cout << "       to back Menu.";
+	GotoXY(54, 15);
+	cout << "       Press any key ";
+	GotoXY(54, 16);
+	cout << "       to back Menu.";
 }
-void winboard() {
+void winboard()
+{
 	system("cls");
-	GotoXY(45, 13); cout << FGRN("XXXXXX  XXXXXX  X    X  XXXXX  XXXX      XX    XXXXX  XXXX");
-	GotoXY(45, 14); cout << FGRN("X       X    X  X X  X  X      X   X    X  X     X     X  ");
-	GotoXY(45, 15); cout << FGRN("X       X    X  X  X X  X   X  XXXX    XXXXXX    X       X");
-	GotoXY(45, 16); cout << FGRN("XXXXXX  XXXXXX  X   XX  XXXXX  X   X  X      X   X    XXXX");
+	GotoXY(45, 13);
+	cout << FGRN("XXXXXX  XXXXXX  X    X  XXXXX  XXXX      XX    XXXXX  XXXX");
+	GotoXY(45, 14);
+	cout << FGRN("X       X    X  X X  X  X      X   X    X  X     X     X  ");
+	GotoXY(45, 15);
+	cout << FGRN("X       X    X  X  X X  X   X  XXXX    XXXXXX    X       X");
+	GotoXY(45, 16);
+	cout << FGRN("XXXXXX  XXXXXX  X   XX  XXXXX  X   X  X      X   X    XXXX");
 }
-/*
-#include "car_move.h"
 
-void CGAME::StartGame()
+void quitboard()
 {
-	while (!is_exit)
-	{
-		updateGame();
-		DrawGame();
-	}
+	system("cls");
+	GotoXY(45, 16);
+	cout << FGRN("THANK YOU! WE HOPE YOU ENJOYED THE GAME!");
+	Sleep(1000);
+	system("cls");
 }
 
-void CGAME::DrawGame()
+void loadmenu()
 {
-	for (int i = 0; i < L_NUM; ++i)
+	GotoXY(60, 16);
+	cout << "L";
+	Sleep(50);
+	cout << "o";
+	Sleep(50);
+	cout << "a";
+	Sleep(50);
+	cout << "d";
+	Sleep(50);
+	cout << "i";
+	Sleep(50);
+	cout << "n";
+	Sleep(50);
+	cout << "g";
+	for (int i = 0; i < 3; ++i)
 	{
-		for (int j = 0; j < object.lane[i].size(); ++j)
-		{
-			object.lane[i][j]->Draw();
-		}
+		GotoXY(67, 16);
+		cout << '.';
+		Sleep(200);
+		cout << '.';
+		Sleep(200);
+		cout << '.';
+		Sleep(300);
+		GotoXY(67, 16);
+		cout << "   ";
 	}
-
-	Sleep(10);
-
-	for (int i = 0; i < L_NUM; ++i)
-	{
-		for (int j = 0; j < object.lane[i].size(); ++j)
-		{
-			object.lane[i][j]->ReDraw();
-		}
-	}
+	system("cls");
+	Sleep(1000);
 }
 
-void CGAME::updateGame()
+void displayLevel(int level)
 {
-	movingObjects *p;
-	int current_location;
-
-	for (int i = 0; i < L_NUM; ++i)
-	{
-		//Push random object to the a lane.
-		if (rand() % 13 == 0)
-		{
-			//If the lane is empty, push without hesitation.
-			if (!object.lane[i].empty())
-			{
-				current_location = object.lane[i].back()->getmX();
-				if (!object.direction[i])
-					current_location = L_WIDTH - current_location;
-
-				//Ensure the objects won't overlap each other.
-				if (current_location < 5)
-					continue;
-			}
-
-			p = object.getMovingObject(i % 4 + 1, i);
-			object.lane[i].push_back(p);
-		}
-
-		//Update objects' coordinate.
-		for (int j = 0; j < object.lane[i].size(); ++j)
-		{
-			if (!object.lane[i][j]->move(object.direction[i]))
-			{
-				p = object.lane[i].front();
-				object.lane[i].pop_front();
-				delete p;
-				--j;
-			}
-		}
-	}
-	DrawGame();
+	system("cls");
+	GotoXY(60, 15);
+	cout << FBLU("L");
+	Sleep(50);
+	cout << FBLU("E");
+	Sleep(50);
+	cout << FBLU("V");
+	Sleep(50);
+	cout << FBLU("E");
+	Sleep(50);
+	cout << FBLU("L ");
+	Sleep(50);
+	cout << level;
+	Sleep(500);
+	system("cls");
 }
-*/
