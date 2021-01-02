@@ -1,7 +1,5 @@
 #include "header.h"
 
-using namespace std;
-
 CANIMAL::CANIMAL(int x, int y, bool goingLeft) : mX(x), mY(y), toLeft(goingLeft) {}
 
 void CANIMAL::move()

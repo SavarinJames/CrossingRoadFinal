@@ -1,7 +1,5 @@
 #include "header.h"
 
-using namespace std;
-
 CGAME game;
 char DIRECTION;
 bool IS_RUNNING;

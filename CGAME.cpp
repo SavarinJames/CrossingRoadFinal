@@ -1,7 +1,5 @@
 #include "header.h"
 
-using namespace std;
-
 CGAME::CGAME()
 {
 	resetGame(1);
