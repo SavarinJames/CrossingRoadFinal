@@ -88,7 +88,7 @@ void SubThread()
 
 int main()
 {
-
+	loadmenu();
 	char t = '1';
 	//string m = "open \"*.mp3\" type mpegvideo alias mp3";
 	//mciSendString(_T("play Music.mp3 repeat"), NULL, 0, NULL);

@@ -298,9 +298,40 @@ void winboard()
 void quitboard()
 {
 	system("cls");
-	GotoXY(45, 13);
-	GotoXY(45, 14);
+	GotoXY(45, 16);
 	cout << FGRN("THANK YOU! WE HOPE YOU ENJOYED THE GAME!");
 	Sleep(1000);
 	system("cls");
+}
+
+void loadmenu()
+{
+	GotoXY(60, 16);
+	cout << "L";
+	Sleep(50);
+	cout << "o";
+	Sleep(50);
+	cout << "a";
+	Sleep(50);
+	cout << "d";
+	Sleep(50);
+	cout << "i";
+	Sleep(50);
+	cout << "n";
+	Sleep(50);
+	cout << "g";
+	for (int i = 0; i < 3; ++i)
+	{
+		GotoXY(67, 16);
+		cout << '.';
+		Sleep(200);
+		cout << '.';
+		Sleep(200);
+		cout << '.';
+		Sleep(300);
+		GotoXY(67, 16);
+		cout << "   ";
+	}
+	system("cls");
+	Sleep(1000);
 }
