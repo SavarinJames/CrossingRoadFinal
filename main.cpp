@@ -13,14 +13,13 @@ int stoptime = 10;
 void SubThread() {
 	while (IS_EXIT) {
 		++stoptime;
-		if (game.getLevel() > 5) {
+		if (game.getLevel() > MAX_LEVEL) {
 			IS_EXIT = false;
 			winboard();
 			break;
 		}
 		Sleep(100);
 		if (IS_RUNNING == true) {
-			;
 			if (!game.getPeople().isDead())
 			{
 				game.updatePosVehicle();
@@ -66,12 +65,12 @@ void SubThread() {
 
 				break;
 			}
-		if (game.getPeople().isFinished())
-		{
-			game.resetGame(game.getLevel() + 1);
-			stoptime = 10;
-		}
-			drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, game.getLevel());
+			if (game.getPeople().isFinished())
+			{
+				game.resetGame(game.getLevel() + 1);
+				stoptime = 10;
+				drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, game.getLevel());
+			}
 
 			//Sleep(100 / cg->getSpeed());
 		}
