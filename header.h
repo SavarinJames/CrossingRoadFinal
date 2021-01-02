@@ -41,6 +41,7 @@
 
 using namespace std;
 
+const int MAX_LEVEL = 10;
 const int CONSOLE_WIDTH = 100;
 const int CONSOLE_HEIGHT = 31;
 const int ground = 4;
@@ -48,7 +49,7 @@ const int ground = 4;
 void FixConsoleWindow();
 void GotoXY(int x, int y);
 void setConsoleSize();
-void drawMap(int width, int height,int level);
+void drawMap(int width, int height, int level);
 void cls();
 void hidecursor();
 void SetColor(int ForgC);
@@ -81,6 +82,7 @@ public:
 	virtual void draw() = 0;
 	int getX() { return mX; }
 	int getY() { return mY; }
+	bool checkImpact(int cordX, int cordY);
 };
 
 class CCAR : public CVEHICLE
@@ -111,6 +113,7 @@ public:
 	virtual void draw() = 0;
 	int getX() { return mX; }
 	int getY() { return mY; }
+	bool checkImpact(int cordX, int cordY);
 };
 
 class CBIRD : public CANIMAL

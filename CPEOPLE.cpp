@@ -44,15 +44,15 @@ void CPEOPLE::Left(int speed)
 
 void CPEOPLE::Right(int speed)
 {
-	/* if (mX + speed >= CONSOLE_WIDTH - 1)
-		 return;*/
+	if (mX + speed >= CONSOLE_WIDTH - 2)
+		return;
 	mX += speed;
 }
 
 bool CPEOPLE::isImpact(const vector<CVEHICLE*>& vehicles)
 {
 	for (int i = 0; i < vehicles.size(); i++)
-		if (vehicles[i]->getX() == mX && vehicles[i]->getY() == mY)
+		if (vehicles[i]->checkImpact(mX, mY))
 		{
 			mState = false;
 			return true;
@@ -63,7 +63,7 @@ bool CPEOPLE::isImpact(const vector<CVEHICLE*>& vehicles)
 bool CPEOPLE::isImpact(const vector<CANIMAL*>& animals)
 {
 	for (int i = 0; i < animals.size(); i++)
-		if (animals[i]->getX() == mX && animals[i]->getY() == mY)
+		if (animals[i]->checkImpact(mX, mY))
 		{
 			mState = false;
 			return true;
@@ -80,5 +80,3 @@ bool CPEOPLE::isFinished()
 {
 	return (mY == 4);
 }
-
-//aa

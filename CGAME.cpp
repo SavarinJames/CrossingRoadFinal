@@ -4,63 +4,7 @@ using namespace std;
 
 CGAME::CGAME()
 {
-	shuffleLanes();
-	level = 1;
-	int maxObj = 3;
-	int randNum;
-	int beginX;
-	int lightCordX, lightCordY;
-	bool leftSide;
-
-	// for Trucks
-	randNum = rand() % maxObj + 3;
-	leftSide = rand() % 2;
-	if (leftSide)
-		lightCordX = 2;
-	else lightCordX = CONSOLE_WIDTH - 2;
-	lightCordY = ground + 5 * lanes[1] - 3;
-	truckLight.setCord(lightCordX, lightCordY);
-	while (randNum--)
-	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
-		CTRUCK* newTruck = new CTRUCK(beginX, ground + 5 * lanes[1], leftSide);
-		trucks.push_back(newTruck);
-	}
-
-	// for Cars
-	randNum = rand() % maxObj + 3;
-	leftSide = rand() % 2;
-	if (leftSide)
-		lightCordX = 2;
-	else lightCordX = CONSOLE_WIDTH - 2;
-	lightCordY = ground + 5 * lanes[2] - 3;
-	carLight.setCord(lightCordX, lightCordY);
-	while (randNum--)
-	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
-		CCAR* newCar = new CCAR(beginX, ground + 5 * lanes[2], leftSide);
-		cars.push_back(newCar);
-	}
-
-	// for Dinos
-	randNum = rand() % maxObj + 3;
-	leftSide = rand() % 2;
-	while (randNum--)
-	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
-		CDINOSAUR* newDino = new CDINOSAUR(beginX, ground + 5 * lanes[3], leftSide);
-		dinos.push_back(newDino);
-	}
-
-	// for Birds
-	randNum = rand() % maxObj + 3;
-	leftSide = rand() % 2;
-	while (randNum--)
-	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
-		CBIRD* newBird = new CBIRD(beginX, ground + 5 * lanes[4], leftSide);
-		birds.push_back(newBird);
-	}
+	resetGame(1);
 }
 
 void CGAME::flipTruckLight()
@@ -77,7 +21,7 @@ void CGAME::startGame()
 {
 	system("cls");
 	resetGame(1);
-	drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT,1);
+	drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, 1);
 	drawGame();
 }
 
@@ -91,7 +35,7 @@ void CGAME::resetGame(int lev)
 
 	shuffleLanes();
 	level = lev;
-	int maxObj = lev * 3;
+	int maxObj = lev * 1;
 	int randNum;
 	int beginX;
 	int lightCordX, lightCordY;
@@ -105,9 +49,11 @@ void CGAME::resetGame(int lev)
 	else lightCordX = CONSOLE_WIDTH - 2;
 	lightCordY = ground + 5 * lanes[1] - 3;		  // light for trucks
 	truckLight.setCord(lightCordX, lightCordY);
+	beginX = 0;
 	while (randNum--)
 	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
+		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
+		if (beginX > CONSOLE_WIDTH - 3) break;
 		CTRUCK* newTruck = new CTRUCK(beginX, ground + 5 * lanes[1], leftSide);
 		trucks.push_back(newTruck);
 	}
@@ -120,9 +66,11 @@ void CGAME::resetGame(int lev)
 	else lightCordX = CONSOLE_WIDTH - 2;
 	lightCordY = ground + 5 * lanes[2] - 3;	     // light for cars
 	carLight.setCord(lightCordX, lightCordY);
+	beginX = 0;
 	while (randNum--)
 	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
+		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
+		if (beginX > CONSOLE_WIDTH - 3) break;
 		CCAR* newCar = new CCAR(beginX, ground + 5 * lanes[2], leftSide);
 		cars.push_back(newCar);
 	}
@@ -130,9 +78,11 @@ void CGAME::resetGame(int lev)
 	// for Dinos
 	randNum = rand() % maxObj + 3;
 	leftSide = rand() % 2;
+	beginX = 0;
 	while (randNum--)
 	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
+		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
+		if (beginX > CONSOLE_WIDTH - 3) break;
 		CDINOSAUR* newDino = new CDINOSAUR(beginX, ground + 5 * lanes[3], leftSide);
 		dinos.push_back(newDino);
 	}
@@ -140,9 +90,11 @@ void CGAME::resetGame(int lev)
 	// for Birds
 	randNum = rand() % maxObj + 3;
 	leftSide = rand() % 2;
+	beginX = 0;
 	while (randNum--)
 	{
-		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
+		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
+		if (beginX > CONSOLE_WIDTH - 3) break;
 		CBIRD* newBird = new CBIRD(beginX, ground + 5 * lanes[4], leftSide);
 		birds.push_back(newBird);
 	}
@@ -307,7 +259,7 @@ void loseboard(int level) {
 	GotoXY(53, 17);  cout << FCYN("|                             |");
 	GotoXY(53, 18);  cout << FCYN("|                             |");
 	GotoXY(53, 19);  cout << FCYN("|_____________________________|");
-	GotoXY(54, 13);  cout << "     YOU LOSE AT LEVEL "<<level; 
+	GotoXY(54, 13);  cout << "     YOU LOSE AT LEVEL " << level;
 
 	GotoXY(54, 15);  cout << "       Press any key ";
 	GotoXY(54, 16);  cout << "       to back Menu.";
