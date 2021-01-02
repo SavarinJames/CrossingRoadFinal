@@ -13,18 +13,7 @@
 #include <conio.h>
 #include <time.h>
 #include <mmsystem.h>
-
-#include <iostream>
-#include <Windows.h>
-#include <conio.h>
-#include <math.h>
-#include <thread>
-#include <fstream>
-#include <string>
 #include <map>
-#include <Mmsystem.h>
-#pragma comment(lib, "Winmm.lib")
-
 #pragma comment(lib, "Winmm.lib")
 
 
@@ -47,11 +36,6 @@
 
 #define BOLD(x) "\x1B[1m" x RST
 #define UNDL(x) "\x1B[4m" x RST
-
-#include <Mmsystem.h>
-#include <mciapi.h>
-//these two headers are already included in the <Windows.h> header
-#pragma comment(lib, "Winmm.lib")
 
 
 using namespace std;
