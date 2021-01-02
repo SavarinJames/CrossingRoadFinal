@@ -92,6 +92,22 @@ void hidecursor()
 	info.bVisible = FALSE;
 	SetConsoleCursorInfo(consoleHandle, &info);
 }
+
+void SetColor(int ForgC)
+{
+	WORD wColor;
+
+	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+
+	if (GetConsoleScreenBufferInfo(hStdOut, &csbi))
+	{
+		wColor = (csbi.wAttributes & 0xF0) + (ForgC & 0x0F);
+		SetConsoleTextAttribute(hStdOut, wColor);
+	}
+	return;
+}
+
 void menu() {
 	system("cls");
 	GotoXY(10, 0); cout << R"(     _____   ____________________________________________________________________________________________________)" << "\n";

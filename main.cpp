@@ -111,7 +111,7 @@ int main()
 */
 void SubThread() {
 	while (IS_EXIT) {
-		//++stoptime;
+		++stoptime;
 
 		Sleep(100);
 		//if (IS_RUNNING==false) ;
@@ -124,8 +124,10 @@ void SubThread() {
 				MOVING = ' ';
 			}
 			game.drawGame();
-
 		}
+
+		if (stoptime % 100 == 0) game.flipTruckLight();
+		if (stoptime % 70 == 0) game.flipCarLight();
 
 		/*
 		if (game.IsFinish()) {

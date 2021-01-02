@@ -9,11 +9,17 @@ CGAME::CGAME()
 	int maxObj = 3;
 	int randNum;
 	int beginX;
+	int lightCordX, lightCordY;
 	bool leftSide;
 
 	// for Trucks
 	randNum = rand() % maxObj + 3;
 	leftSide = rand() % 2;
+	if (leftSide)
+		lightCordX = 2;
+	else lightCordX = CONSOLE_WIDTH - 2;
+	lightCordY = ground + 5 * lanes[1] - 3;
+	truckLight.setCord(lightCordX, lightCordY);
 	while (randNum--)
 	{
 		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
@@ -24,6 +30,11 @@ CGAME::CGAME()
 	// for Cars
 	randNum = rand() % maxObj + 3;
 	leftSide = rand() % 2;
+	if (leftSide)
+		lightCordX = 2;
+	else lightCordX = CONSOLE_WIDTH - 2;
+	lightCordY = ground + 5 * lanes[2] - 3;
+	carLight.setCord(lightCordX, lightCordY);
 	while (randNum--)
 	{
 		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
@@ -52,6 +63,16 @@ CGAME::CGAME()
 	}
 }
 
+void CGAME::flipTruckLight()
+{
+	truckLight.lightSwitch();
+}
+
+void CGAME::flipCarLight()
+{
+	carLight.lightSwitch();
+}
+
 void CGAME::startGame()
 {
 	system("cls");
@@ -73,11 +94,17 @@ void CGAME::resetGame(int lev)
 	int maxObj = lev * 3;
 	int randNum;
 	int beginX;
+	int lightCordX, lightCordY;
 	bool leftSide;
 
 	// for Trucks
 	randNum = rand() % maxObj + 3;
 	leftSide = rand() % 2;
+	if (leftSide)
+		lightCordX = 2;
+	else lightCordX = CONSOLE_WIDTH - 2;
+	lightCordY = ground + 5 * lanes[1] - 3;		  // light for trucks
+	truckLight.setCord(lightCordX, lightCordY);
 	while (randNum--)
 	{
 		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
@@ -88,6 +115,11 @@ void CGAME::resetGame(int lev)
 	// for Cars
 	randNum = rand() % maxObj + 3;
 	leftSide = rand() % 2;
+	if (leftSide)
+		lightCordX = 2;
+	else lightCordX = CONSOLE_WIDTH - 2;
+	lightCordY = ground + 5 * lanes[2] - 3;	     // light for cars
+	carLight.setCord(lightCordX, lightCordY);
 	while (randNum--)
 	{
 		beginX = rand() % (CONSOLE_WIDTH - 1) + 1;
@@ -166,10 +198,12 @@ vector<CANIMAL*> CGAME::getAnimal()
 
 void CGAME::updatePosVehicle()
 {
-	for (int i = 0; i < trucks.size(); i++)
-		trucks[i]->move();
-	for (int i = 0; i < cars.size(); i++)
-		cars[i]->move();
+	if (truckLight.canGo())
+		for (int i = 0; i < trucks.size(); i++)
+			trucks[i]->move();
+	if (carLight.canGo())
+		for (int i = 0; i < cars.size(); i++)
+			cars[i]->move();
 }
 
 void CGAME::updatePosAnimal()
@@ -195,19 +229,21 @@ void CGAME::updatePosPeople(int direction)
 		break;
 	case ('D'):
 		human.Right(1);
-
 		break;
 	default:
 		break;
 	}
 }
 
+
 void CGAME::drawGame()
 {
 	cls();
 
+	truckLight.draw();
 	for (int i = 0; i < trucks.size(); i++)
 		trucks[i]->draw();
+	carLight.draw();
 	for (int i = 0; i < cars.size(); i++)
 		cars[i]->draw();
 
