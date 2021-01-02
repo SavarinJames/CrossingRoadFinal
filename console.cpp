@@ -26,7 +26,7 @@ void setConsoleSize()
 	MoveWindow(consoleWindow, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, TRUE);
 }
 
-void drawMap(int width, int height)
+void drawMap(int width, int height, int level)
 {
 	GotoXY(1, 0);
 	for (int x = 1; x < width; x++)
@@ -57,7 +57,7 @@ void drawMap(int width, int height)
 	GotoXY(width + 10, 4);
 	cout << FYEL("^^^CROSSING ROAD^^^");
 	GotoXY(width + 16, 6);
-	cout << FGRN("LEVEL ...");
+	cout << FGRN("LEVEL ")<<level;
 	GotoXY(width + 2, 6);
 	//cout << FRED("Please Pause before load/save game");
 	//GotoXY(WIDTH + 8, 8); cout << "	";

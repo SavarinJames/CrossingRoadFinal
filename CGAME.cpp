@@ -77,7 +77,7 @@ void CGAME::startGame()
 {
 	system("cls");
 	resetGame(1);
-	drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT);
+	drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT,1);
 	drawGame();
 }
 
@@ -295,7 +295,30 @@ void ImpactEffect(int x, int y) {
 	GotoXY(x + 3, y - 2);
 	cout << FRED("  @~^");
 }
+void loseboard(int level) {
+	system("cls");
+	GotoXY(53, 10);  cout << FCYN(" _____________________________");
+	GotoXY(53, 11);  cout << FCYN("|                             |");
+	GotoXY(53, 12);  cout << FCYN("|                             |");
+	GotoXY(53, 13);  cout << FCYN("|                             |");
+	GotoXY(53, 14);  cout << FCYN("|                             |");
+	GotoXY(53, 15);  cout << FCYN("|                             |");
+	GotoXY(53, 16);  cout << FCYN("|                             |");
+	GotoXY(53, 17);  cout << FCYN("|                             |");
+	GotoXY(53, 18);  cout << FCYN("|                             |");
+	GotoXY(53, 19);  cout << FCYN("|_____________________________|");
+	GotoXY(54, 13);  cout << "     YOU LOSE AT LEVEL "<<level; 
 
+	GotoXY(54, 15);  cout << "       Press any key ";
+	GotoXY(54, 16);  cout << "       to back Menu.";
+}
+void winboard() {
+	system("cls");
+	GotoXY(45, 13); cout << FGRN("XXXXXX  XXXXXX  X    X  XXXXX  XXXX      XX    XXXXX  XXXX");
+	GotoXY(45, 14); cout << FGRN("X       X    X  X X  X  X      X   X    X  X     X     X  ");
+	GotoXY(45, 15); cout << FGRN("X       X    X  X  X X  X   X  XXXX    XXXXXX    X       X");
+	GotoXY(45, 16); cout << FGRN("XXXXXX  XXXXXX  X   XX  XXXXX  X   X  X      X   X    XXXX");
+}
 /*
 #include "car_move.h"
 
