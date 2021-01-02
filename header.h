@@ -47,12 +47,15 @@ const int ground = 4;
 void FixConsoleWindow();
 void GotoXY(int x, int y);
 void setConsoleSize();
-void drawMap(int width, int height, int level);
 void cls();
 void hidecursor();
 void SetColor(int ForgC);
+
+void drawMap(int width, int height, int level);
+
 void menu();
 void ImpactEffect(int x, int y);
+
 void loseboard(int level);
 void winboard();
 void quitboard();
@@ -65,11 +68,14 @@ protected:
 
 public:
 	CVEHICLE(int x, int y, bool goingLeft);
+
 	void move();
 	virtual void draw() = 0;
+
+	bool checkImpact(int cordX, int cordY);
+
 	int getX() { return mX; }
 	int getY() { return mY; }
-	bool checkImpact(int cordX, int cordY);
 };
 
 class CCAR : public CVEHICLE
@@ -96,11 +102,14 @@ protected:
 
 public:
 	CANIMAL(int x, int y, bool goingLeft);
+
 	void move();
 	virtual void draw() = 0;
+
+	bool checkImpact(int cordX, int cordY);
+
 	int getX() { return mX; }
 	int getY() { return mY; }
-	bool checkImpact(int cordX, int cordY);
 };
 
 class CBIRD : public CANIMAL
@@ -128,16 +137,20 @@ private:
 public:
 	const string shape = "???";
 	CPEOPLE();
+
 	void revive();
 	void Up();
 	void Left(int speed);
 	void Right(int speed);
 	void Down();
+
 	bool isImpact(const vector<CVEHICLE *> &vehicles);
 	bool isImpact(const vector<CANIMAL *> &animals);
 	bool isFinished();
 	bool isDead();
+
 	void draw();
+
 	int getX() { return mX; }
 	int getY() { return mY; }
 };
@@ -150,44 +163,55 @@ private:
 
 public:
 	CLIGHT();
+
 	void setCord(int cordX, int cordY);
 	void lightSwitch();
 	void draw();
+
 	bool canGo() { return !red; }
 };
 
 class CGAME
 {
 private:
-	int level;
-	int lanes[5] = {0, 1, 2, 3, 4};
 	vector<CTRUCK *> trucks;
 	vector<CCAR *> cars;
 	vector<CDINOSAUR *> dinos;
 	vector<CBIRD *> birds;
+
 	CPEOPLE human;
 	CLIGHT truckLight, carLight;
 
+	int lanes[5] = {0, 1, 2, 3, 4};
+	int level;
+
 public:
-	void shuffleLanes();
 	CGAME();
 	~CGAME();
-	void flipTruckLight();
-	void flipCarLight();
-	void drawGame();
+
 	CPEOPLE getPeople();
 	vector<CVEHICLE *> getVehicle();
 	vector<CANIMAL *> getAnimal();
-	void resetGame(int lev);
-	void exitGame(HANDLE);
+
+	void shuffleLanes();
+
+	void flipTruckLight();
+	void flipCarLight();
+
 	void startGame();
-	void loadGame(ifstream);
-	void saveGame(ofstream);
+	void exitGame(HANDLE);
 	void pauseGame(HANDLE);
 	void resumeGame(HANDLE);
+	void resetGame(int lev);
+
+	void loadGame(ifstream);
+	void saveGame(ofstream);
+
+	void drawGame();
 	void updatePosPeople(int direction);
 	void updatePosVehicle();
 	void updatePosAnimal();
+
 	void deleteMovingObj();
 	int getLevel() { return level; }
 };
