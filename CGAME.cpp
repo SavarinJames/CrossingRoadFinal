@@ -301,6 +301,6 @@ void quitboard()
 	GotoXY(45, 13);
 	GotoXY(45, 14);
 	cout << FGRN("THANK YOU! WE HOPE YOU ENJOYED THE GAME!");
-	sleep(1000);
+	Sleep(1000);
 	system("cls");
 }
