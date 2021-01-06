@@ -42,6 +42,7 @@ using namespace std;
 const int MAX_LEVEL = 10;
 const int CONSOLE_WIDTH = 100;
 const int CONSOLE_HEIGHT = 31;
+const int CONSOLE_INTWIDTH = 130;
 const int ground = 4;
 
 void FixConsoleWindow();
@@ -130,6 +131,16 @@ public:
 	void draw();
 };
 
+class SaveFile {
+private:
+	string name;
+	int level;
+public:
+	int getLevel();
+	string getName();
+	SaveFile(int, string);
+};
+
 class CPEOPLE
 {
 private:
@@ -176,11 +187,14 @@ public:
 class CGAME
 {
 private:
-	vector<CTRUCK *> trucks;
-	vector<CCAR *> cars;
-	vector<CDINOSAUR *> dinos;
-	vector<CBIRD *> birds;
 
+	int level,numOfFiles;
+	int lanes[5] = { 0, 1, 2, 3, 4 };
+	vector<CTRUCK*> trucks;
+	vector<CCAR*> cars;
+	vector<CDINOSAUR*> dinos;
+	vector<CBIRD*> birds;
+	SaveFile* File[10];
 	CPEOPLE human;
 	CLIGHT truckLight, carLight;
 
@@ -199,9 +213,16 @@ public:
 
 	void flipTruckLight();
 	void flipCarLight();
-
-	void startGame();
+	void drawGame();
+	//void updateLevel();
+	CPEOPLE getPeople();
+	vector<CVEHICLE*> getVehicle();
+	vector<CANIMAL*> getAnimal();
+	void resetGame(int lev);
 	void exitGame(HANDLE);
+	void startGame();
+	void loadGame();
+	void saveGame();
 	void pauseGame(HANDLE);
 	void resumeGame(HANDLE);
 	void resetGame(int lev);
@@ -216,6 +237,8 @@ public:
 
 	void deleteMovingObj();
 	int getLevel() { return level; }
+	int getLevel(int lev);
+	void Clean();
 };
 
 #endif

@@ -51,20 +51,20 @@ void drawMap(int width, int height, int level)
 		for (int x = 1; x < width; x++)
 			cout << char(95);
 	}
-	GotoXY(width + 10, 4);
+	GotoXY(width + 5, 4);
 	cout << FYEL("^^^CROSSING ROAD^^^");
-	GotoXY(width + 16, 6);
+	GotoXY(width + 11, 6);
 	cout << FGRN("LEVEL ") << level;
 	GotoXY(width + 2, 6);
 	//cout << FRED("Please Pause before load/save game");
 	//GotoXY(WIDTH + 8, 8); cout << "	";
-	GotoXY(width + 10, 12);
+	GotoXY(width + 8, 12);
 	cout << FMAG("P: Pause/Resume");
-	GotoXY(width + 10, 14);
+	GotoXY(width + 8, 14);
 	cout << FCYN("K: Save");
-	GotoXY(width + 10, 16);
+	GotoXY(width + 8, 16);
 	cout << FRED("L: Load");
-	GotoXY(width + 10, 18);
+	GotoXY(width + 8, 18);
 	cout << FBLU("ESC: Return");
 }
 

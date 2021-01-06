@@ -103,19 +103,46 @@ int main()
 		//game = new CGAME();
 		IS_EXIT = true;
 		IS_RUNNING = true;
-		MOVING = ' ';
-		stoptime = 10;
-		if (t == '1' || t == '2')
-		{
-			if (t == '2')
-			{
-				// loadgame.
+		MOVING = ' '; stoptime = 10;
+		if (t == '1' || t == '2') {
+			if (t == '2') {
+				ifstream fin; int numberOfSave = 0; SaveFile* File[100];
+				fin.open("SaveFile.txt");
+
+				int level; string name;
+				GotoXY(17, 15);
+				if (fin.peek() == ifstream::traits_type::eof())
+					cout << "There is no save file!!";
+				else {
+					cout << "Here are saved files: ";
+					int line = 17;
+					while (!(fin.peek() == ifstream::traits_type::eof())) {
+						getline(fin, name);
+						fin >> level;
+						fin.ignore(100, '\n');
+						File[numberOfSave] = new SaveFile(level, name);
+						GotoXY(17, line);
+						cout << numberOfSave + 1 << ". " << File[numberOfSave]->getName() << " " << File[numberOfSave]->getLevel();
+						numberOfSave += 1; line += 1;
+					}
+
+					fin.close();
+
+					char type; type = _getch();
+					if (type != 27) {
+						int a = type - '0';
+						if (a <= numberOfSave && a > 0) {
+							int level = File[a - 1]->getLevel();
+							game.getLevel(level);							
+						}
+					}					
+					else continue;
+        }
 			}
+
 			int temp = 0;
 			setConsoleSize();
 			FixConsoleWindow();
-
-			displayLevel(1);
 			game.startGame();
 			thread t1(SubThread);
 			while (IS_EXIT)
@@ -140,19 +167,13 @@ int main()
 							IS_RUNNING = true;
 						}
 					}
-					else if (temp == 'K')
-					{
-						if (IS_RUNNING)
-						{
-						}
-						//else game.saveGame();
+					else if (temp == 'K') {
+						if (IS_RUNNING) {}
+						else game.saveGame();
 					}
-					else if (temp == 'L')
-					{
-						if (IS_RUNNING)
-						{
-						}
-						//else game.loadGame();
+					else if (temp == 'L') {
+						if (IS_RUNNING) {}
+						else game.loadGame();
 					}
 					else
 					{
