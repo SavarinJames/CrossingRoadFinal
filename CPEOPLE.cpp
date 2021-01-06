@@ -1,7 +1,5 @@
 #include "header.h"
 
-using namespace std;
-
 CPEOPLE::CPEOPLE() : mX(CONSOLE_WIDTH / 2), mY(CONSOLE_HEIGHT - 2), mState(true) {}
 
 void CPEOPLE::revive()
@@ -49,7 +47,7 @@ void CPEOPLE::Right(int speed)
 	mX += speed;
 }
 
-bool CPEOPLE::isImpact(const vector<CVEHICLE*>& vehicles)
+bool CPEOPLE::isImpact(const vector<CVEHICLE *> &vehicles)
 {
 	for (int i = 0; i < vehicles.size(); i++)
 		if (vehicles[i]->checkImpact(mX, mY))
@@ -60,7 +58,7 @@ bool CPEOPLE::isImpact(const vector<CVEHICLE*>& vehicles)
 	return false;
 }
 
-bool CPEOPLE::isImpact(const vector<CANIMAL*>& animals)
+bool CPEOPLE::isImpact(const vector<CANIMAL *> &animals)
 {
 	for (int i = 0; i < animals.size(); i++)
 		if (animals[i]->checkImpact(mX, mY))

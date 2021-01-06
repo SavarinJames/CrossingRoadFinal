@@ -1,8 +1,6 @@
 #include "header.h"
 
-using namespace std;
-
-CLIGHT::CLIGHT() :mX(0), mY(0), red(false) {}
+CLIGHT::CLIGHT() : mX(0), mY(0), red(false) {}
 
 void CLIGHT::lightSwitch() { red = !red; }
 

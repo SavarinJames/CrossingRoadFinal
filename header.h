@@ -17,7 +17,6 @@
 #include <sstream>
 #pragma comment(lib, "Winmm.lib")
 
-
 #define RST "\x1B[0m"
 #define KRED "\x1B[31m"
 #define KGRN "\x1B[32m"
@@ -27,7 +26,7 @@
 #define KCYN "\x1B[36m"
 #define KWHT "\x1B[37m"
 
-#define FRED(x) KRED x RST        
+#define FRED(x) KRED x RST
 #define FGRN(x) KGRN x RST
 #define FYEL(x) KYEL x RST
 #define FBLU(x) KBLU x RST
@@ -37,7 +36,6 @@
 
 #define BOLD(x) "\x1B[1m" x RST
 #define UNDL(x) "\x1B[4m" x RST
-
 
 using namespace std;
 
@@ -50,26 +48,20 @@ const int ground = 4;
 void FixConsoleWindow();
 void GotoXY(int x, int y);
 void setConsoleSize();
-void drawMap(int width, int height, int level);
 void cls();
 void hidecursor();
 void SetColor(int ForgC);
+
+void drawMap(int width, int height, int level);
+
 void menu();
 void ImpactEffect(int x, int y);
+void displayLevel(int level);
+
+void loadmenu();
 void loseboard(int level);
 void winboard();
-// class MovingObj
-// {
-// protected:
-//     int mX, mY; // top left cordinate;
-//     int height, width;
-
-// public:
-//     MovingObj() : mX(0), mY(0), height(0), width(0) {}
-//     MovingObj(int cordX, int cordY, int hi, int wi) : mX(cordX), mY(cordY), height(hi), width(wi) {}
-//     virtual void draw() = 0;
-//     virtual bool impact(int cordX, int cordY) = 0;
-// };
+void quitboard();
 
 class CVEHICLE
 {
@@ -79,11 +71,14 @@ protected:
 
 public:
 	CVEHICLE(int x, int y, bool goingLeft);
+
 	void move();
 	virtual void draw() = 0;
+
+	bool checkImpact(int cordX, int cordY);
+
 	int getX() { return mX; }
 	int getY() { return mY; }
-	bool checkImpact(int cordX, int cordY);
 };
 
 class CCAR : public CVEHICLE
@@ -110,11 +105,14 @@ protected:
 
 public:
 	CANIMAL(int x, int y, bool goingLeft);
+
 	void move();
 	virtual void draw() = 0;
+
+	bool checkImpact(int cordX, int cordY);
+
 	int getX() { return mX; }
 	int getY() { return mY; }
-	bool checkImpact(int cordX, int cordY);
 };
 
 class CBIRD : public CANIMAL
@@ -152,16 +150,20 @@ private:
 public:
 	const string shape = "???";
 	CPEOPLE();
+
 	void revive();
 	void Up();
 	void Left(int speed);
 	void Right(int speed);
 	void Down();
-	bool isImpact(const vector<CVEHICLE*>& vehicles);
-	bool isImpact(const vector<CANIMAL*>& animals);
+
+	bool isImpact(const vector<CVEHICLE *> &vehicles);
+	bool isImpact(const vector<CANIMAL *> &animals);
 	bool isFinished();
 	bool isDead();
+
 	void draw();
+
 	int getX() { return mX; }
 	int getY() { return mY; }
 };
@@ -171,17 +173,21 @@ class CLIGHT
 private:
 	int mX, mY;
 	bool red;
+
 public:
 	CLIGHT();
+
 	void setCord(int cordX, int cordY);
 	void lightSwitch();
 	void draw();
+
 	bool canGo() { return !red; }
 };
 
 class CGAME
 {
 private:
+
 	int level,numOfFiles;
 	int lanes[5] = { 0, 1, 2, 3, 4 };
 	vector<CTRUCK*> trucks;
@@ -192,10 +198,19 @@ private:
 	CPEOPLE human;
 	CLIGHT truckLight, carLight;
 
+	int lanes[5] = {0, 1, 2, 3, 4};
+	int level;
+
 public:
-	void shuffleLanes();
 	CGAME();
 	~CGAME();
+
+	CPEOPLE getPeople();
+	vector<CVEHICLE *> getVehicle();
+	vector<CANIMAL *> getAnimal();
+
+	void shuffleLanes();
+
 	void flipTruckLight();
 	void flipCarLight();
 	void drawGame();
@@ -210,14 +225,20 @@ public:
 	void saveGame();
 	void pauseGame(HANDLE);
 	void resumeGame(HANDLE);
+	void resetGame(int lev);
+
+	void loadGame(ifstream);
+	void saveGame(ofstream);
+
+	void drawGame();
 	void updatePosPeople(int direction);
 	void updatePosVehicle();
 	void updatePosAnimal();
+
 	void deleteMovingObj();
 	int getLevel() { return level; }
 	int getLevel(int lev);
 	void Clean();
 };
-
 
 #endif

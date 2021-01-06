@@ -1,8 +1,5 @@
 #include "header.h"
 
-
-using namespace std;
-
 void FixConsoleWindow()
 {
 	HWND consoleWindow = GetConsoleWindow();
@@ -22,7 +19,7 @@ void GotoXY(int x, int y)
 void setConsoleSize()
 {
 	HWND consoleWindow = GetConsoleWindow();
-	RECT rect = { 100, 100, 1150, 650 };
+	RECT rect = {100, 100, 1150, 650};
 	MoveWindow(consoleWindow, rect.left, rect.top, rect.right - rect.left, rect.bottom - rect.top, TRUE);
 }
 
@@ -108,64 +105,132 @@ void SetColor(int ForgC)
 	return;
 }
 
-void menu() {
+void menu()
+{
 	system("cls");
-	GotoXY(10, 0); cout << R"(     _____   ____________________________________________________________________________________________________)" << "\n";
-	GotoXY(10, 1); cout << R"(    /  __ \                                                                                                      |)" << "\n";
-	GotoXY(10, 2); cout << R"(    | /  \/_ __ ___  ___ ___                                                                                     |)" << "\n";
-	GotoXY(10, 3); cout << R"(    | |   | '__/ _ \/ __/ __|                                                                                    |)" << "\n";
-	GotoXY(10, 4); cout << R"(    | \__/\ | | (_) \__ \__ \                                                                                    |)" << "\n";
-	GotoXY(10, 5); cout << R"(     \____/_|  \___/|___/___/                                                                                    |)" << "\n";
-	GotoXY(10, 6); cout << R"(    ______                _                                                                                      |)" << "\n";
-	GotoXY(10, 7); cout << R"(    | ___ \              | |                                                                                     |)" << "\n";
-	GotoXY(10, 8); cout << R"(    | |_/ /___   __ _  __| |                                                                                     |)" << "\n";
-	GotoXY(10, 9); cout << R"(    |    // _ \ / _` |/ _` |                                                                                     |)" << "\n";
-	GotoXY(10, 10); cout << R"(    | |\ \ (_) | (_| | (_| |                                                                                     |)" << "\n";
-	GotoXY(10, 11); cout << R"(    \_| \_\___/ \__,_|\__,_|                                                                                     |)";
-	GotoXY(10, 12); cout << R"(                                                                                                                 |)";
-	GotoXY(10, 13); cout << R"(                                                                                                                 |)";
-	GotoXY(10, 14); cout << R"(                                                                                                                 |)";
-	GotoXY(10, 15); cout << R"(                                                                                                                 |)";
-	GotoXY(10, 16); cout << R"(                                                                                                                 |)";
-	GotoXY(10, 17); cout << R"(                                                                                                                 |)";
-
+	GotoXY(10, 0);
+	cout << R"(     _____   ____________________________________________________________________________________________________)"
+		 << "\n";
+	GotoXY(10, 1);
+	cout << R"(    /  __ \                                                                                                      |)"
+		 << "\n";
+	GotoXY(10, 2);
+	cout << R"(    | /  \/_ __ ___  ___ ___                                                                                     |)"
+		 << "\n";
+	GotoXY(10, 3);
+	cout << R"(    | |   | '__/ _ \/ __/ __|                                                                                    |)"
+		 << "\n";
+	GotoXY(10, 4);
+	cout << R"(    | \__/\ | | (_) \__ \__ \                                                                                    |)"
+		 << "\n";
+	GotoXY(10, 5);
+	cout << R"(     \____/_|  \___/|___/___/                                                                                    |)"
+		 << "\n";
+	GotoXY(10, 6);
+	cout << R"(    ______                _                                                                                      |)"
+		 << "\n";
+	GotoXY(10, 7);
+	cout << R"(    | ___ \              | |                                                                                     |)"
+		 << "\n";
+	GotoXY(10, 8);
+	cout << R"(    | |_/ /___   __ _  __| |                                                                                     |)"
+		 << "\n";
+	GotoXY(10, 9);
+	cout << R"(    |    // _ \ / _` |/ _` |                                                                                     |)"
+		 << "\n";
+	GotoXY(10, 10);
+	cout << R"(    | |\ \ (_) | (_| | (_| |                                                                                     |)"
+		 << "\n";
+	GotoXY(10, 11);
+	cout << R"(    \_| \_\___/ \__,_|\__,_|                                                                                     |)";
+	GotoXY(10, 12);
+	cout << R"(                                                                                                                 |)";
+	GotoXY(10, 13);
+	cout << R"(                                                                                                                 |)";
+	GotoXY(10, 14);
+	cout << R"(                                                                                                                 |)";
+	GotoXY(10, 15);
+	cout << R"(                                                                                                                 |)";
+	GotoXY(10, 16);
+	cout << R"(                                                                                                                 |)";
+	GotoXY(10, 17);
+	cout << R"(                                                                                                                 |)";
 
 	// system("cls");
-	GotoXY(54, 10);   cout << " ___________________________";
-	GotoXY(54, 11);   cout << "|                           |";
-	GotoXY(54, 12);  cout << "|                           |";
-	GotoXY(54, 13);  cout << "|                           |";
-	GotoXY(54, 14);  cout << "|                           |";
-	GotoXY(54, 15);  cout << "|                           |";
-	GotoXY(54, 16);  cout << "|                           |";
-	GotoXY(54, 17);  cout << "|                           |";
-	GotoXY(54, 18);  cout << "|                           |";
-	GotoXY(54, 19);  cout << "|___________________________|";
+	GotoXY(54, 10);
+	cout << " ___________________________";
+	GotoXY(54, 11);
+	cout << "|                           |";
+	GotoXY(54, 12);
+	cout << "|                           |";
+	GotoXY(54, 13);
+	cout << "|                           |";
+	GotoXY(54, 14);
+	cout << "|                           |";
+	GotoXY(54, 15);
+	cout << "|                           |";
+	GotoXY(54, 16);
+	cout << "|                           |";
+	GotoXY(54, 17);
+	cout << "|                           |";
+	GotoXY(54, 18);
+	cout << "|                           |";
+	GotoXY(54, 19);
+	cout << "|___________________________|";
 
-	GotoXY(55, 12);  cout << FRED("       1. NEW GAME.      ");
+	GotoXY(55, 12);
+	cout << FRED("       1. NEW GAME.      ");
 
-	GotoXY(55, 14);  cout << FBLU("       2. LOAD GAME.     ");
+	GotoXY(55, 14);
+	cout << FBLU("       2. LOAD GAME.     ");
 
-	GotoXY(55, 16);  cout << FGRN("       3. SETTINGS.      ");
+	GotoXY(55, 16);
+	cout << FGRN("       3. SETTINGS.      ");
 
-	GotoXY(55, 18);  cout << FMAG("       4. QUIT.          ");
+	GotoXY(55, 18);
+	cout << FMAG("       4. QUIT.          ");
 
 	GotoXY(95, 10);
-	GotoXY(95, 18); cout << R"(     _____                  |)" << "\n";
-	GotoXY(95, 19); cout << R"(    /  __ \                 |)" << "\n";
-	GotoXY(95, 20); cout << R"(    | /  \/_ __ ___  ___ ___ )" << "\n";
-	GotoXY(95, 21); cout << R"(    | |   | '__/ _ \/ __/ __|)" << "\n";
-	GotoXY(95, 22); cout << R"(    | \__/\ | | (_) \__ \__ \)" << "\n";
-	GotoXY(95, 23); cout << R"(     \____/_|  \___/|___/___/)" << "\n";
-	GotoXY(95, 24); cout << R"(    ______                _ )" << "\n";
-	GotoXY(95, 25); cout << R"(    | ___ \              | |)" << "\n";
-	GotoXY(95, 26); cout << R"(    | |_/ /___   __ _  __| |)" << "\n";
-	GotoXY(95, 27); cout << R"(    |    // _ \ / _` |/ _` |)" << "\n";
-	GotoXY(95, 28); cout << R"(    | |\ \ (_) | (_| | (_| |)" << "\n";
-	GotoXY(95, 29); cout << R"(    \_| \_\___/ \__,_|\__,_|)";
+	GotoXY(95, 18);
+	cout << R"(     _____                  |)"
+		 << "\n";
+	GotoXY(95, 19);
+	cout << R"(    /  __ \                 |)"
+		 << "\n";
+	GotoXY(95, 20);
+	cout << R"(    | /  \/_ __ ___  ___ ___ )"
+		 << "\n";
+	GotoXY(95, 21);
+	cout << R"(    | |   | '__/ _ \/ __/ __|)"
+		 << "\n";
+	GotoXY(95, 22);
+	cout << R"(    | \__/\ | | (_) \__ \__ \)"
+		 << "\n";
+	GotoXY(95, 23);
+	cout << R"(     \____/_|  \___/|___/___/)"
+		 << "\n";
+	GotoXY(95, 24);
+	cout << R"(    ______                _ )"
+		 << "\n";
+	GotoXY(95, 25);
+	cout << R"(    | ___ \              | |)"
+		 << "\n";
+	GotoXY(95, 26);
+	cout << R"(    | |_/ /___   __ _  __| |)"
+		 << "\n";
+	GotoXY(95, 27);
+	cout << R"(    |    // _ \ / _` |/ _` |)"
+		 << "\n";
+	GotoXY(95, 28);
+	cout << R"(    | |\ \ (_) | (_| | (_| |)"
+		 << "\n";
+	GotoXY(95, 29);
+	cout << R"(    \_| \_\___/ \__,_|\__,_|)";
 	// GotoXY(10, 29); cout << R"(                                                                                                                 |)";
-	GotoXY(10, 29); cout << R"(    _____________________________________________________________________________________)";
-	for (int i = 29; i >= 13; --i) {
+	GotoXY(10, 29);
+	cout << R"(    _____________________________________________________________________________________)";
+	for (int i = 29; i >= 13; --i)
+	{
 		GotoXY(14, i);
 		cout << "|";
 	}
