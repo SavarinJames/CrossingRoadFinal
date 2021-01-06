@@ -41,23 +41,6 @@ void SubThread()
 			if (stoptime % 70 == 0)
 				game.flipCarLight();
 
-			/*
-			if (game.IsFinish()) {
-				game.ScoreBoard(true);
-				IS_EXIT = false;
-				break;
-			}
-			*/
-
-			/*
-			MOVING = ' ';
-			if (stoptime % 20 > 10) {
-				cg->DrawLight(true);
-				cg->Update();
-			}
-			else {
-				cg->DrawLight(false);
-			}*/
 			if (game.getPeople().isImpact(game.getVehicle()) || game.getPeople().isImpact(game.getAnimal()))
 			{
 				int impCordX = game.getPeople().getX();
@@ -66,8 +49,6 @@ void SubThread()
 				ImpactEffect(game.getPeople().getX(), game.getPeople().getY());
 				Sleep(1000);
 				loseboard(game.getLevel());
-				//cout << char(178);
-				//game.resetGame();
 				IS_EXIT = false;
 
 				break;
@@ -75,11 +56,15 @@ void SubThread()
 
 			if (game.getPeople().isFinished())
 			{
-				game.resetGame(game.getLevel() + 1);
-				mciSendString(TEXT("play passlevel.mp3 "), NULL, 0, NULL);
-				stoptime = 10;
-				displayLevel(game.getLevel());
-				drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, game.getLevel());
+				if (game.getLevel() < MAX_LEVEL)
+				{
+					game.resetGame(game.getLevel() + 1);
+					mciSendString(TEXT("play passlevel.mp3 "), NULL, 0, NULL);
+					stoptime = 10;
+					displayLevel(game.getLevel());
+					drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, game.getLevel());
+				}
+				else game.setLevel(game.getLevel() + 1);
 			}
 
 			//Sleep(100 / cg->getSpeed());
@@ -133,11 +118,11 @@ int main()
 						int a = type - '0';
 						if (a <= numberOfSave && a > 0) {
 							int level = File[a - 1]->getLevel();
-							game.getLevel(level);							
+							game.setLevel(level);
 						}
-					}					
+					}
 					else continue;
-        }
+				}
 			}
 
 			int temp = 0;
