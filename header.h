@@ -39,7 +39,7 @@
 
 using namespace std;
 
-const int MAX_LEVEL = 10;
+const int MAX_LEVEL = 5;
 const int CONSOLE_WIDTH = 100;
 const int CONSOLE_HEIGHT = 31;
 const int CONSOLE_INTWIDTH = 130;
@@ -55,7 +55,7 @@ void SetColor(int ForgC);
 void drawMap(int width, int height, int level);
 
 void menu();
-void ImpactEffect(int x, int y);
+void ImpactEffect(int x, int y,bool VoA);
 void displayLevel(int level);
 
 void loadmenu();

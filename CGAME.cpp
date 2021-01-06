@@ -256,7 +256,7 @@ CGAME::~CGAME()
 void CGAME::Clean() {
 	int i = 20;
 	while (i < CONSOLE_HEIGHT) {
-		GotoXY(CONSOLE_WIDTH + 1, i); for (int j = 0; j < CONSOLE_INTWIDTH - 104; j++)cout << " ";
+		GotoXY(CONSOLE_WIDTH + 1, i); for (int j = 0; j < CONSOLE_INTWIDTH - 100; j++)cout << " ";
 		i += 1;
 	}
 }
@@ -308,7 +308,7 @@ int CGAME::setLevel(int lev) {
 void CGAME::saveGame() {
 	Clean();
 	ofstream fout; char  a = 'a'; string name = "";
-	GotoXY(CONSOLE_WIDTH + 1, 20); cout << "Enter your save file name:";
+	GotoXY(CONSOLE_WIDTH + 5, 20); cout << "Enter your save file name:";
 
 	while (a != 27) {
 		GotoXY(CONSOLE_WIDTH + 5, 22); cout << name << "";
@@ -328,7 +328,7 @@ void CGAME::saveGame() {
 	Clean();
 }
 
-void ImpactEffect(int x, int y)
+void ImpactEffect(int x, int y,bool VoA)
 {
 	GotoXY(x + 3, y - 3);
 	cout << FGRN("OOPS!!$%");
@@ -340,7 +340,8 @@ void ImpactEffect(int x, int y)
 	GotoXY(x + 3, y - 2);
 	cout << FYEL("  @~^");
 	Sleep(300);
-	mciSendString(TEXT("play crash.mp3 "), NULL, 0, NULL);
+	if (VoA==true)mciSendString(TEXT("play crash.mp3 "), NULL, 0, NULL);
+	else mciSendString(TEXT("play Bird.mp3  "), NULL, 0, NULL);
 	GotoXY(x + 3, y - 3);
 	cout << FRED("OOPS!!$%");
 	GotoXY(x + 3, y - 2);
