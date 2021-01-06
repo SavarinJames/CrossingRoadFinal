@@ -15,17 +15,17 @@ void CGAME::flipCarLight()
 	carLight.lightSwitch();
 }
 
-void CGAME::startGame()
+void CGAME::startGame(int levelt)
 {
 	system("cls");
-	if (level == 1) {
+	if (levelt == 1) {
 		resetGame(1);
 		drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, 1);
 		drawGame();
 	}
 	else {
-		resetGame(level);
-		drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, level);
+		resetGame(levelt);
+		drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, levelt);
 		drawGame();
 	}
 }
