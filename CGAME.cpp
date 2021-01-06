@@ -20,9 +20,16 @@ void CGAME::flipCarLight()
 void CGAME::startGame()
 {
 	system("cls");
-	resetGame(1);
-	drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, 1);
-	drawGame();
+	if (level == 1) {
+		resetGame(1);
+		drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, 1);
+		drawGame();
+	}
+	else {
+		resetGame(level);
+		drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, level);
+		drawGame();
+	}
 }
 
 void CGAME::resetGame(int lev)
@@ -225,9 +232,96 @@ void CGAME::deleteMovingObj()
 	birds.clear();
 }
 
+//SAVEFILE
+SaveFile::SaveFile(int lev, string name) {
+	level = lev;
+	this->name = name;
+}
+
+int SaveFile::getLevel() {
+	return level;
+}
+string SaveFile::getName() {
+	return name;
+}
+
 CGAME::~CGAME()
 {
 	deleteMovingObj();
+}
+
+void CGAME::Clean() {
+	int i = 20;
+	while (i < CONSOLE_HEIGHT) {
+		GotoXY(CONSOLE_WIDTH + 1, i);for (int j = 0; j < CONSOLE_INTWIDTH - 104 ;j++)cout << " ";
+		i += 1;
+	}
+}
+
+//void CGAME::updateLevel() {
+//
+//}
+
+void CGAME::loadGame() {
+	Clean();
+	ifstream fin;
+	numOfFiles = 0;
+	
+	fin.open("SaveFile.txt");
+
+	int level; string name;
+	GotoXY(CONSOLE_WIDTH + 5, 20);
+	if (fin.peek() == ifstream::traits_type::eof()) cout << "There is no save file!";
+	else {
+		cout << "All save files:";
+		int line = 22;
+		while (!(fin.peek() == ifstream::traits_type::eof())) {
+			getline(fin, name);
+			fin >> level;
+			fin.ignore(100, '\n');
+			File[numOfFiles] = new SaveFile(level, name);
+			GotoXY(CONSOLE_WIDTH + 5, line); 
+			cout << numOfFiles + 1 << ". " << File[numOfFiles]->getName() << " " << File[numOfFiles]->getLevel();				
+			numOfFiles += 1; line += 1;
+		}
+
+		char type; type = _getch();
+		if (type != 27) {
+			int a = type - '0';
+			if (a <= numOfFiles && a > 0) {
+				level = File[a - 1]->getLevel() - 1;
+				resetGame(level);
+			}
+		}
+		Clean();
+	}
+}
+int CGAME::getLevel(int lev) {
+	level = lev;
+	return level;
+}
+
+void CGAME::saveGame() {
+	Clean();
+	ofstream fout; char  a = 'a'; string name = "";
+	GotoXY(CONSOLE_WIDTH + 1, 20); cout << "Enter your save file name:";
+
+	while (a != 27) {
+		GotoXY(CONSOLE_WIDTH + 5, 22); cout << name << "";
+		a = _getch();
+		if (a == 127 && name.size() > 0) name.pop_back();
+		else if (a == 13) {
+			fout.open("SaveFile.txt", std::ios_base::app);
+			fout << name << endl << level << endl;
+			fout.close();
+
+			GotoXY(CONSOLE_WIDTH + 5, 24); cout << "Save completely!";
+			Sleep(2000);
+			break;
+		}
+		else if (a != 27) name.push_back(a);
+	}
+	Clean();
 }
 
 void ImpactEffect(int x, int y) {
