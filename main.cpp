@@ -36,9 +36,9 @@ void SubThread()
 				game.drawGame();
 			}
 
-			if (stoptime % 100 == 0)
+			if (stoptime % 50 == 0)
 				game.flipTruckLight();
-			if (stoptime % 70 == 0)
+			if (stoptime % 40 == 0)
 				game.flipCarLight();
 
 			if (game.getPeople().isImpact(game.getVehicle()) || game.getPeople().isImpact(game.getAnimal()))
@@ -181,6 +181,7 @@ int main()
 		}
 		else if (t == '3')
 		{
+			system("cls");
 			GotoXY(50, 16);
 			cout << "   Input again.";
 			Sleep(2000);

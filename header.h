@@ -39,7 +39,7 @@
 
 using namespace std;
 
-const int MAX_LEVEL = 2;
+const int MAX_LEVEL = 10;
 const int CONSOLE_WIDTH = 100;
 const int CONSOLE_HEIGHT = 31;
 const int CONSOLE_INTWIDTH = 130;
