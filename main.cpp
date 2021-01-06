@@ -74,15 +74,17 @@ void SubThread()
 
 int main()
 {
+	hidecursor();
+	setConsoleSize();
+	FixConsoleWindow();
+	int levelt;
 	loadmenu();
 	char t = '1';
 	//string m = "open \"*.mp3\" type mpegvideo alias mp3";
 	//mciSendString(_T("play Music.mp3 repeat"), NULL, 0, NULL);
+	
 	while (t != '4')
 	{
-		hidecursor();
-		setConsoleSize();
-		FixConsoleWindow();
 		menu();
 		t = _getch();
 		//game = new CGAME();
@@ -117,18 +119,22 @@ int main()
 					if (type != 27) {
 						int a = type - '0';
 						if (a <= numberOfSave && a > 0) {
-							int level = File[a - 1]->getLevel();
-							game.setLevel(level);
+							levelt = File[a - 1]->getLevel();
+							//game.setLevel(level);
 						}
 					}
 					else continue;
 				}
 			}
+			else if (t == '1') {
+				levelt = 1;
+			}
 
 			int temp = 0;
 			setConsoleSize();
 			FixConsoleWindow();
-			game.startGame();
+			displayLevel(levelt);
+			game.startGame(levelt);
 			thread t1(SubThread);
 			while (IS_EXIT)
 			{
@@ -157,8 +163,10 @@ int main()
 						else game.saveGame();
 					}
 					else if (temp == 'L') {
+
 						if (IS_RUNNING) {}
-						else game.loadGame();
+						
+						else if(!IS_EXIT)game.loadGame();
 					}
 					else
 					{
@@ -169,7 +177,7 @@ int main()
 				else
 				{
 					if (temp == 'Y')
-						game.startGame();
+						game.startGame(levelt);
 					else
 					{
 						//game.exitGame(t1.native_handle());

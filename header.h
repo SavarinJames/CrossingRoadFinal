@@ -215,7 +215,7 @@ public:
 	//void updateLevel();
 
 	void resetGame(int lev);
-	void startGame();
+	void startGame(int level1);
 	void loadGame();
 	void saveGame();
 						 
