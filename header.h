@@ -198,8 +198,8 @@ private:
 	CPEOPLE human;
 	CLIGHT truckLight, carLight;
 
-	int lanes[5] = {0, 1, 2, 3, 4};
-	int level;
+	/*int lanes[5] = {0, 1, 2, 3, 4};
+	int level;*/
 
 public:
 	CGAME();
@@ -213,12 +213,12 @@ public:
 
 	void flipTruckLight();
 	void flipCarLight();
-	void drawGame();
+	//void drawGame();
 	//void updateLevel();
-	CPEOPLE getPeople();
-	vector<CVEHICLE*> getVehicle();
-	vector<CANIMAL*> getAnimal();
-	void resetGame(int lev);
+	//CPEOPLE getPeople();
+	//vector<CVEHICLE*> getVehicle();
+	//vector<CANIMAL*> getAnimal();
+	//void resetGame(int lev);
 	void exitGame(HANDLE);
 	void startGame();
 	void loadGame();
