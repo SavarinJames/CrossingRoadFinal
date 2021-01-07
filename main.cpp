@@ -46,7 +46,10 @@ void SubThread()
 				int impCordX = game.getPeople().getX();
 				int impCordY = game.getPeople().getY();
 				GotoXY(impCordX, impCordY);
-				ImpactEffect(game.getPeople().getX(), game.getPeople().getY());
+				bool VoA;
+				if (game.getPeople().isImpact(game.getVehicle()))VoA = true;
+				else if (game.getPeople().isImpact(game.getAnimal()))VoA = false;
+				ImpactEffect(game.getPeople().getX(), game.getPeople().getY(),VoA);
 				Sleep(1000);
 				loseboard(game.getLevel());
 				IS_EXIT = false;
