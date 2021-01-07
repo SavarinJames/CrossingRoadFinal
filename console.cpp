@@ -182,13 +182,13 @@ void menu()
 	cout << FRED("       1. NEW GAME.      ");
 
 	GotoXY(55, 14);
-	cout << FBLU("       2. LOAD GAME.     ");
+	cout << FMAG("       2. LOAD GAME.     ");
 
 	GotoXY(55, 16);
-	cout << FGRN("       3. SETTINGS.      ");
+	cout << FCYN("       3. SETTINGS.      ");
 
 	GotoXY(55, 18);
-	cout << FMAG("       4. QUIT.          ");
+	cout << FBLU("       4. QUIT.          ");
 
 	GotoXY(95, 10);
 	GotoXY(95, 18);
