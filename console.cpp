@@ -55,16 +55,16 @@ void drawMap(int width, int height, int level)
 	cout << FYEL("^^^CROSSING ROAD^^^");
 	GotoXY(width + 11, 6);
 	cout << FGRN("LEVEL ") << level;
-	GotoXY(width + 2, 6);
-	//cout << FRED("Please Pause before load/save game");
+	GotoXY(width + 3, 10);
+	cout << FRED("Pls Pause before save!");
 	//GotoXY(WIDTH + 8, 8); cout << "	";
 	GotoXY(width + 8, 12);
 	cout << FMAG("P: Pause/Resume");
 	GotoXY(width + 8, 14);
 	cout << FCYN("K: Save");
+	/*GotoXY(width + 8, 16);
+	cout << FRED("L: Load");*/
 	GotoXY(width + 8, 16);
-	cout << FRED("L: Load");
-	GotoXY(width + 8, 18);
 	cout << FBLU("ESC: Return");
 }
 
