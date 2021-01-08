@@ -104,15 +104,16 @@ int main()
 				if (fin.peek() == ifstream::traits_type::eof())
 					cout << "There is no save file!!";
 				else {
-					cout << "Here are saved files: ";
-					int line = 17;
+					cout << char(254) <<" Here are saved files: ";
+					int line = 18;
 					while (!(fin.peek() == ifstream::traits_type::eof())) {
 						getline(fin, name);
 						fin >> level;
 						fin.ignore(100, '\n');
 						File[numberOfSave] = new SaveFile(level, name);
-						GotoXY(17, line);
-						cout << numberOfSave + 1 << ". " << File[numberOfSave]->getName() << " " << File[numberOfSave]->getLevel();
+						GotoXY(23, 17);cout << FYEL("NAME");GotoXY(31, 17);cout << FGRN("LEVEL ");
+						GotoXY(19, line);
+						cout << numberOfSave + 1 << ".  " << File[numberOfSave]->getName();GotoXY(33,line);cout << File[numberOfSave]->getLevel();
 						numberOfSave += 1; line += 1;
 					}
 
