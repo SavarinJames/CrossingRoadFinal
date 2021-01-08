@@ -15,17 +15,17 @@ void CGAME::flipCarLight()
 	carLight.lightSwitch();
 }
 
-void CGAME::startGame()
+void CGAME::startGame(int levelt)
 {
 	system("cls");
-	if (level == 1) {
+	if (levelt == 1) {
 		resetGame(1);
 		drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, 1);
 		drawGame();
 	}
 	else {
-		resetGame(level);
-		drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, level);
+		resetGame(levelt);
+		drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, levelt);
 		drawGame();
 	}
 }
@@ -61,7 +61,7 @@ void CGAME::resetGame(int lev)
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
 		if (beginX > CONSOLE_WIDTH - 3)
 			break;
-		CTRUCK *newTruck = new CTRUCK(beginX, ground + 5 * lanes[1], leftSide);
+		CTRUCK* newTruck = new CTRUCK(beginX, ground + 5 * lanes[1], leftSide);
 		trucks.push_back(newTruck);
 	}
 
@@ -80,7 +80,7 @@ void CGAME::resetGame(int lev)
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
 		if (beginX > CONSOLE_WIDTH - 3)
 			break;
-		CCAR *newCar = new CCAR(beginX, ground + 5 * lanes[2], leftSide);
+		CCAR* newCar = new CCAR(beginX, ground + 5 * lanes[2], leftSide);
 		cars.push_back(newCar);
 	}
 
@@ -93,7 +93,7 @@ void CGAME::resetGame(int lev)
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
 		if (beginX > CONSOLE_WIDTH - 3)
 			break;
-		CDINOSAUR *newDino = new CDINOSAUR(beginX, ground + 5 * lanes[3], leftSide);
+		CDINOSAUR* newDino = new CDINOSAUR(beginX, ground + 5 * lanes[3], leftSide);
 		dinos.push_back(newDino);
 	}
 
@@ -106,7 +106,7 @@ void CGAME::resetGame(int lev)
 		beginX += rand() % (CONSOLE_WIDTH / maxObj) + 3;
 		if (beginX > CONSOLE_WIDTH - 3)
 			break;
-		CBIRD *newBird = new CBIRD(beginX, ground + 5 * lanes[4], leftSide);
+		CBIRD* newBird = new CBIRD(beginX, ground + 5 * lanes[4], leftSide);
 		birds.push_back(newBird);
 	}
 }
@@ -127,33 +127,33 @@ CPEOPLE CGAME::getPeople()
 	return human;
 }
 
-vector<CVEHICLE *> CGAME::getVehicle()
+vector<CVEHICLE*> CGAME::getVehicle()
 {
-	vector<CVEHICLE *> vehicles;
+	vector<CVEHICLE*> vehicles;
 	for (int i = 0; i < trucks.size(); i++)
 	{
-		CVEHICLE *p = trucks[i];
+		CVEHICLE* p = trucks[i];
 		vehicles.push_back(p);
 	}
 	for (int i = 0; i < cars.size(); i++)
 	{
-		CVEHICLE *p = cars[i];
+		CVEHICLE* p = cars[i];
 		vehicles.push_back(p);
 	}
 	return vehicles;
 }
 
-vector<CANIMAL *> CGAME::getAnimal()
+vector<CANIMAL*> CGAME::getAnimal()
 {
-	vector<CANIMAL *> animals;
+	vector<CANIMAL*> animals;
 	for (int i = 0; i < birds.size(); i++)
 	{
-		CANIMAL *p = birds[i];
+		CANIMAL* p = birds[i];
 		animals.push_back(p);
 	}
 	for (int i = 0; i < dinos.size(); i++)
 	{
-		CANIMAL *p = dinos[i];
+		CANIMAL* p = dinos[i];
 		animals.push_back(p);
 	}
 	return animals;
@@ -256,7 +256,7 @@ CGAME::~CGAME()
 void CGAME::Clean() {
 	int i = 20;
 	while (i < CONSOLE_HEIGHT) {
-		GotoXY(CONSOLE_WIDTH + 1, i);for (int j = 0; j < CONSOLE_INTWIDTH - 104 ;j++)cout << " ";
+		GotoXY(CONSOLE_WIDTH + 1, i); for (int j = 0; j < CONSOLE_INTWIDTH - 100; j++)cout << " ";
 		i += 1;
 	}
 }
@@ -269,7 +269,7 @@ void CGAME::loadGame() {
 	Clean();
 	ifstream fin;
 	numOfFiles = 0;
-	
+
 	fin.open("SaveFile.txt");
 
 	int level; string name;
@@ -283,8 +283,8 @@ void CGAME::loadGame() {
 			fin >> level;
 			fin.ignore(100, '\n');
 			File[numOfFiles] = new SaveFile(level, name);
-			GotoXY(CONSOLE_WIDTH + 5, line); 
-			cout << numOfFiles + 1 << ". " << File[numOfFiles]->getName() << " " << File[numOfFiles]->getLevel();				
+			GotoXY(CONSOLE_WIDTH + 5, line);
+			cout << numOfFiles + 1 << ". " << File[numOfFiles]->getName() << " " << File[numOfFiles]->getLevel();
 			numOfFiles += 1; line += 1;
 		}
 
@@ -299,7 +299,8 @@ void CGAME::loadGame() {
 		Clean();
 	}
 }
-int CGAME::getLevel(int lev) {
+
+int CGAME::setLevel(int lev) {
 	level = lev;
 	return level;
 }
@@ -307,7 +308,7 @@ int CGAME::getLevel(int lev) {
 void CGAME::saveGame() {
 	Clean();
 	ofstream fout; char  a = 'a'; string name = "";
-	GotoXY(CONSOLE_WIDTH + 1, 20); cout << "Enter your save file name:";
+	GotoXY(CONSOLE_WIDTH + 5, 20); cout << "Enter your save file name:";
 
 	while (a != 27) {
 		GotoXY(CONSOLE_WIDTH + 5, 22); cout << name << "";
@@ -327,7 +328,7 @@ void CGAME::saveGame() {
 	Clean();
 }
 
-void ImpactEffect(int x, int y)
+void ImpactEffect(int x, int y,bool VoA)
 {
 	GotoXY(x + 3, y - 3);
 	cout << FGRN("OOPS!!$%");
@@ -339,7 +340,8 @@ void ImpactEffect(int x, int y)
 	GotoXY(x + 3, y - 2);
 	cout << FYEL("  @~^");
 	Sleep(300);
-	mciSendString(TEXT("play crash.mp3 "), NULL, 0, NULL);
+	if (VoA==true)mciSendString(TEXT("play crash.mp3 "), NULL, 0, NULL);
+	else mciSendString(TEXT("play Bird.mp3  "), NULL, 0, NULL);
 	GotoXY(x + 3, y - 3);
 	cout << FRED("OOPS!!$%");
 	GotoXY(x + 3, y - 2);

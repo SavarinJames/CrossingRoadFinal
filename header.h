@@ -39,7 +39,7 @@
 
 using namespace std;
 
-const int MAX_LEVEL = 10;
+const int MAX_LEVEL = 5;
 const int CONSOLE_WIDTH = 100;
 const int CONSOLE_HEIGHT = 31;
 const int CONSOLE_INTWIDTH = 130;
@@ -55,7 +55,7 @@ void SetColor(int ForgC);
 void drawMap(int width, int height, int level);
 
 void menu();
-void ImpactEffect(int x, int y);
+void ImpactEffect(int x, int y,bool VoA);
 void displayLevel(int level);
 
 void loadmenu();
@@ -157,8 +157,8 @@ public:
 	void Right(int speed);
 	void Down();
 
-	bool isImpact(const vector<CVEHICLE *> &vehicles);
-	bool isImpact(const vector<CANIMAL *> &animals);
+	bool isImpact(const vector<CVEHICLE*>& vehicles);
+	bool isImpact(const vector<CANIMAL*>& animals);
 	bool isFinished();
 	bool isDead();
 
@@ -188,7 +188,7 @@ class CGAME
 {
 private:
 
-	int level,numOfFiles;
+	int level, numOfFiles;
 	int lanes[5] = { 0, 1, 2, 3, 4 };
 	vector<CTRUCK*> trucks;
 	vector<CCAR*> cars;
@@ -198,46 +198,34 @@ private:
 	CPEOPLE human;
 	CLIGHT truckLight, carLight;
 
-	/*int lanes[5] = {0, 1, 2, 3, 4};
-	int level;*/
-
 public:
 	CGAME();
 	~CGAME();
 
 	CPEOPLE getPeople();
-	vector<CVEHICLE *> getVehicle();
-	vector<CANIMAL *> getAnimal();
+	vector<CVEHICLE*> getVehicle();
+	vector<CANIMAL*> getAnimal();
 
 	void shuffleLanes();
 
 	void flipTruckLight();
 	void flipCarLight();
-	//void drawGame();
-	//void updateLevel();
-	//CPEOPLE getPeople();
-	//vector<CVEHICLE*> getVehicle();
-	//vector<CANIMAL*> getAnimal();
-	//void resetGame(int lev);
-	void exitGame(HANDLE);
-	void startGame();
-	void loadGame();
-	void saveGame();
-	void pauseGame(HANDLE);
-	void resumeGame(HANDLE);
-	void resetGame(int lev);
-
-	void loadGame(ifstream);
-	void saveGame(ofstream);
 
 	void drawGame();
+	//void updateLevel();
+
+	void resetGame(int lev);
+	void startGame(int level1);
+	void loadGame();
+	void saveGame();
+						 
 	void updatePosPeople(int direction);
 	void updatePosVehicle();
 	void updatePosAnimal();
 
 	void deleteMovingObj();
 	int getLevel() { return level; }
-	int getLevel(int lev);
+	int setLevel(int lev);
 	void Clean();
 };
 

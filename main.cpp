@@ -36,38 +36,22 @@ void SubThread()
 				game.drawGame();
 			}
 
-			if (stoptime % 100 == 0)
+			if (stoptime % 50 == 0)
 				game.flipTruckLight();
-			if (stoptime % 70 == 0)
+			if (stoptime % 40 == 0)
 				game.flipCarLight();
 
-			/*
-			if (game.IsFinish()) {
-				game.ScoreBoard(true);
-				IS_EXIT = false;
-				break;
-			}
-			*/
-
-			/*
-			MOVING = ' ';
-			if (stoptime % 20 > 10) {
-				cg->DrawLight(true);
-				cg->Update();
-			}
-			else {
-				cg->DrawLight(false);
-			}*/
 			if (game.getPeople().isImpact(game.getVehicle()) || game.getPeople().isImpact(game.getAnimal()))
 			{
 				int impCordX = game.getPeople().getX();
 				int impCordY = game.getPeople().getY();
 				GotoXY(impCordX, impCordY);
-				ImpactEffect(game.getPeople().getX(), game.getPeople().getY());
+				bool VoA;
+				if (game.getPeople().isImpact(game.getVehicle()))VoA = true;
+				else if (game.getPeople().isImpact(game.getAnimal()))VoA = false;
+				ImpactEffect(game.getPeople().getX(), game.getPeople().getY(),VoA);
 				Sleep(1000);
 				loseboard(game.getLevel());
-				//cout << char(178);
-				//game.resetGame();
 				IS_EXIT = false;
 
 				break;
@@ -75,11 +59,15 @@ void SubThread()
 
 			if (game.getPeople().isFinished())
 			{
-				game.resetGame(game.getLevel() + 1);
-				mciSendString(TEXT("play passlevel.mp3 "), NULL, 0, NULL);
-				stoptime = 10;
-				displayLevel(game.getLevel());
-				drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, game.getLevel());
+				if (game.getLevel() < MAX_LEVEL)
+				{
+					game.resetGame(game.getLevel() + 1);
+					mciSendString(TEXT("play passlevel.mp3 "), NULL, 0, NULL);
+					stoptime = 10;
+					displayLevel(game.getLevel());
+					drawMap(CONSOLE_WIDTH, CONSOLE_HEIGHT, game.getLevel());
+				}
+				else game.setLevel(game.getLevel() + 1);
 			}
 
 			//Sleep(100 / cg->getSpeed());
@@ -89,15 +77,17 @@ void SubThread()
 
 int main()
 {
+	hidecursor();
+	setConsoleSize();
+	FixConsoleWindow();
+	int levelt;
 	loadmenu();
 	char t = '1';
 	//string m = "open \"*.mp3\" type mpegvideo alias mp3";
 	//mciSendString(_T("play Music.mp3 repeat"), NULL, 0, NULL);
+	
 	while (t != '4')
 	{
-		hidecursor();
-		setConsoleSize();
-		FixConsoleWindow();
 		menu();
 		t = _getch();
 		//game = new CGAME();
@@ -133,18 +123,22 @@ int main()
 					if (type != 27) {
 						int a = type - '0';
 						if (a <= numberOfSave && a > 0) {
-							int level = File[a - 1]->getLevel();
-							game.getLevel(level);							
+							levelt = File[a - 1]->getLevel();
+							//game.setLevel(level);
 						}
-					}					
+					}
 					else continue;
-        }
+				}
+			}
+			else if (t == '1') {
+				levelt = 1;
 			}
 
 			int temp = 0;
 			setConsoleSize();
 			FixConsoleWindow();
-			game.startGame();
+			displayLevel(levelt);
+			game.startGame(levelt);
 			thread t1(SubThread);
 			while (IS_EXIT)
 			{
@@ -173,8 +167,10 @@ int main()
 						else game.saveGame();
 					}
 					else if (temp == 'L') {
+
 						if (IS_RUNNING) {}
-						else game.loadGame();
+						
+						else if(!IS_EXIT)game.loadGame();
 					}
 					else
 					{
@@ -185,7 +181,7 @@ int main()
 				else
 				{
 					if (temp == 'Y')
-						game.startGame();
+						game.startGame(levelt);
 					else
 					{
 						//game.exitGame(t1.native_handle());
@@ -197,6 +193,7 @@ int main()
 		}
 		else if (t == '3')
 		{
+			system("cls");
 			GotoXY(50, 16);
 			cout << "   Input again.";
 			Sleep(2000);
