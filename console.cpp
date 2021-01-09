@@ -56,16 +56,16 @@ void drawMap(int width, int height, int level)
 	GotoXY(width + 17, 6);
 	cout << FGRN("LEVEL ") << level;
 
-	GotoXY(width + 3, 10);
-	cout << FRED("Pls Pause before save!");
+	GotoXY(width + 7, 10);
+	cout << FRED("Please Pause before save!");
 
 	//GotoXY(WIDTH + 8, 8); cout << "	";
-	GotoXY(width + 11, 12);
+	GotoXY(width + 12, 12);
 	cout << FMAG("P: Pause/Resume");
-	GotoXY(width + 11, 14);
+	GotoXY(width + 12, 14);
 	cout << FCYN("K: Save");
 
-	GotoXY(width + 11, 16);
+	GotoXY(width + 12, 16);
 	cout << FBLU("ESC: Return");
 }
 
